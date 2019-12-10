@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+iOS 从 MRR 到 ARC
+MRR 和 ARCARC是 LLVM3.0 iOS5.0 Lion 之后的compile特性，极大地优化了MRR，简化内存管理。核心思想是：ownership，object-graph。ARC 比 MRR 强多了.ARC有两部分组成：front-end compl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 从 MRR 到 ARC">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/07/09/14_iOS-MRR-to-ARC/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+iOS 从 MRR 到 ARC
+MRR 和 ARCARC是 LLVM3.0 iOS5.0 Lion 之后的compile特性，极大地优化了MRR，简化内存管理。核心思想是：ownership，object-graph。ARC 比 MRR 强多了.ARC有两部分组成：front-end compl">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-MRR-to-ARC-What-Is-MRR-ARC.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-MRR-to-ARC-Xcode-Auto-Convert.png">
+<meta property="og:updated_time" content="2019-01-17T03:35:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 从 MRR 到 ARC">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+iOS 从 MRR 到 ARC
+MRR 和 ARCARC是 LLVM3.0 iOS5.0 Lion 之后的compile特性，极大地优化了MRR，简化内存管理。核心思想是：ownership，object-graph。ARC 比 MRR 强多了.ARC有两部分组成：front-end compl">
+<meta name="twitter:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-MRR-to-ARC-What-Is-MRR-ARC.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/07/09/14_iOS-MRR-to-ARC/">
+
+  <title> iOS 从 MRR 到 ARC | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS 从 MRR 到 ARC
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-09T00:00:00+08:00" content="2016-07-09">
+              2016-07-09
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/09/14_iOS-MRR-to-ARC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/09/14_iOS-MRR-to-ARC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<p>iOS 从 MRR 到 ARC</p>
+<h4 id="MRR-和-ARC"><a href="#MRR-和-ARC" class="headerlink" title="MRR 和 ARC"></a>MRR 和 ARC</h4><p>ARC是 LLVM3.0 iOS5.0 Lion 之后的compile特性，极大地优化了MRR，简化内存管理。核心思想是：ownership，object-graph。<br>ARC 比 MRR 强多了.<br>ARC有两部分组成：<br>front-end complier<br>optimizer</p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-MRR-to-ARC-What-Is-MRR-ARC.jpg" alt="iOS-MRR-to-ARC-What-Is-MRR-ARC.jpg"></p>
+<p>（1）MRR是Apple的称法，MRC是民间的称法。<br>依据 <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html" target="_blank" rel="external">【Apple】 referred to as “manual retain-release” or MRR, you explicitly manage memory by keeping track of objects you own</a></p>
+<p>（2）MRR主要注意: 谁创建(new/alloc/copy/retain) 谁管理(object ownership) 谁释放(release/autorelease); 另注意 GCD 异步的时候，block的生命周期；Core Foundation和Foundation桥接的时候，所有权转移的问题；NSTimer和NSRunloop、GCD之间的关系。</p>
+<p>（3）MRR 迁移到 ARC，参考：</p>
+<p><a href="http://blog.mugunthkumar.com/articles/migrating-your-code-to-objective-c-arc/" target="_blank" rel="external">Migrating your code to Objective-C ARC</a></p>
+<p><a href="http://onevcat.com/2012/06/arc-hand-by-hand/" target="_blank" rel="external">手把手教你ARC——iOS/Mac开发ARC入门和使用</a></p>
+<p>附加参考：</p>
+<p><a href="http://stackoverflow.com/questions/8760431/to-arc-or-not-to-arc-what-are-the-pros-and-cons" target="_blank" rel="external">To ARC or not to ARC? What are the pros and cons?</a></p>
+<p><a href="http://stackoverflow.com/questions/13039779/convert-non-arc-to-arc-project-without-recreate-it" target="_blank" rel="external">Convert non-ARC to ARC project without recreate it?</a></p>
+<p><a href="http://stackoverflow.com/questions/20543335/migrating-issue-from-non-arc-to-arc-with-xcode-5-0-2" target="_blank" rel="external">Migrating issue from non ARC to ARC with XCode 5.0.2</a></p>
+<p><a href="http://blog.mugunthkumar.com/articles/migrating-your-code-to-objective-c-arc/" target="_blank" rel="external">Migrating your code to Objective-C ARC</a></p>
+<p><a href="https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html" target="_blank" rel="external">Transitioning to ARC Release Notes —————— 这个不错，很详细，推荐。</a></p>
+<p><a href="http://stackoverflow.com/questions/7874342/what-is-the-difference-between-objective-c-automatic-reference-counting-and-garb" target="_blank" rel="external">What is the difference between Objective C automatic reference counting and garbage collection</a></p>
+<p><a href="http://stackoverflow.com/questions/8815200/receiver-type-for-instance-message-is-a-forward-declaration" target="_blank" rel="external">receiver type <em>*</em> for instance message is a forward declaration (这个很好)</a></p>
+<p><a href="http://stackoverflow.com/questions/8368157/existing-ivar-title-for-unsafe-unretained-property-title-must-be-unsafe-un" target="_blank" rel="external">Existing ivar ‘title’ for unsafe_unretained property ‘title’ must be __unsafe_unretained</a></p>
+<p><a href="http://stackoverflow.com/questions/20238772/receiver-type-is-forward-declaration" target="_blank" rel="external">Receiver type is forward declaration</a></p>
+<p><a href="http://stackoverflow.com/questions/19018456/ios-blocks-and-strong-weak-references-to-self" target="_blank" rel="external">iOS blocks and strong/weak references to self</a></p>
+<h4 id="MRR-迁移到-ARC"><a href="#MRR-迁移到-ARC" class="headerlink" title="MRR 迁移到 ARC"></a>MRR 迁移到 ARC</h4><p>两种方案：</p>
+<p>方案A<br>1、原来使用MRR的 .m文件，保持使用MRR（ 即，不改动代码）；<br>2、之后 写新的代码，使用ARC。</p>
+<p>方案B<br>1、原来使用MRR的 .m文件，借助Xcode迁移到ARC（有一部分要手改动）；<br>2、之后 写新的代码，使用ARC。</p>
+<p>怎么选择，看项目所处的状态，以及 是否有空闲时间：<br>如果，项目太庞大了、或者没有空闲时间来改，采用<strong>方案A</strong><br>否则，采用<strong>方案B</strong></p>
+<p>步骤 a、<br>Xcode |  Edit  |   Convert  —&gt; To Objective-C ARC<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-MRR-to-ARC-Xcode-Auto-Convert.png" alt="iOS-MRR-to-ARC-Xcode-Auto-Convert.png"></p>
+<p>步骤 b、<br>（b1）<br>iWoMail.xcodeproj 文件，在build phases中，把所有原来使用MRR(手动引用释放)的 .m文件，添加标记  -fno-objc-arc  。—————— 注意：原来标记  -f-objc-arc  的文件(主要是任务模块), 这些文件的标记  -f-objc-arc  保持不变。</p>
+<p>（b2）<br>mailcore2.xcodeproj文件，在build phases中，把所有这个开源库中的文件(因为这个开源库用的是MRR) .m文件， 添加标记  -fno-objc-arc  。</p>
+<p>（b3）<br>肉眼观察第三方库的 .m文件，特别对于MRR的第三方库，验证标记是  -fno-objc-arc  。<br>使用instrument的leak工具，来分析：有没有内存泄漏。</p>
+<p>注意：</p>
+<p>如果在（b1）和（b2）中，遇到问题，请看：<br><a href="http://blog.mugunthkumar.com/articles/migrating-your-code-to-objective-c-arc/" target="_blank" rel="external">Transitioning to ARC Release Notes</a> —————— 这个不错，很详细，推荐。</p>
+<p><a href="https://cocoapods.org/pods/ARCMacro" target="_blank" rel="external">ARCMacro</a></p>
+<p><a href="http://www.cnblogs.com/dongwenbo/p/4286766.html" target="_blank" rel="external">iOS开发之ARC MRC混编</a></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/11_iOS-MultiThreading-Practices/" rel="next" title="iOS多线程并发">
+                <i class="fa fa-chevron-left"></i> iOS多线程并发
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/10/5_SVN-to-Git/" rel="prev" title="从 SVN 到 Git">
+                从 SVN 到 Git <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MRR-和-ARC"><span class="nav-number">1.</span> <span class="nav-text">MRR 和 ARC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MRR-迁移到-ARC"><span class="nav-number">2.</span> <span class="nav-text">MRR 迁移到 ARC</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/07/09/14_iOS-MRR-to-ARC/';
+      var disqus_title = "iOS 从 MRR 到 ARC";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/07/09/14_iOS-MRR-to-ARC/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

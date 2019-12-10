@@ -1,0 +1,778 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+Stanford公开课iOS 开发－Stanford公开课，是美国斯坦福大学的公开课，涉及iOS4、iOS5、iOS6、iOS7、iOS8、iOS9 等
+这里，只下载了 iOS7(Objective-C)、iOS8(Swift)、iOS9(Swift) 等相关课程。
+下载方式：
+方式一：iTun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS公开课＋学习资料">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/07/12/9_iOS-Study-Lectures-Docs/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+Stanford公开课iOS 开发－Stanford公开课，是美国斯坦福大学的公开课，涉及iOS4、iOS5、iOS6、iOS7、iOS8、iOS9 等
+这里，只下载了 iOS7(Objective-C)、iOS8(Swift)、iOS9(Swift) 等相关课程。
+下载方式：
+方式一：iTun">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iTunesU.jpeg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iBooks.jpeg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-skill-route.JPG">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-skill-tree.jpg">
+<meta property="og:updated_time" content="2019-01-17T03:35:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS公开课＋学习资料">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+Stanford公开课iOS 开发－Stanford公开课，是美国斯坦福大学的公开课，涉及iOS4、iOS5、iOS6、iOS7、iOS8、iOS9 等
+这里，只下载了 iOS7(Objective-C)、iOS8(Swift)、iOS9(Swift) 等相关课程。
+下载方式：
+方式一：iTun">
+<meta name="twitter:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iTunesU.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/07/12/9_iOS-Study-Lectures-Docs/">
+
+  <title> iOS公开课＋学习资料 | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS公开课＋学习资料
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-12T00:00:00+08:00" content="2016-07-12">
+              2016-07-12
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/12/9_iOS-Study-Lectures-Docs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/12/9_iOS-Study-Lectures-Docs/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<h4 id="Stanford公开课"><a href="#Stanford公开课" class="headerlink" title="Stanford公开课"></a>Stanford公开课</h4><p>iOS 开发－Stanford公开课，是美国斯坦福大学的公开课，涉及iOS4、iOS5、iOS6、iOS7、iOS8、iOS9 等</p>
+<p>这里，只下载了 iOS7(Objective-C)、iOS8(Swift)、iOS9(Swift) 等相关课程。</p>
+<p>下载方式：</p>
+<p>方式一：iTunes U  (选择方式一，如果你英语很好)<br>    1、在Mac或者Window上，安装“iTunes U”软件<br>    2、在“iTunes U”中搜索“iOS”或者“Swift”，找到相关课程，然后进行下载</p>
+<p>方式二：网易公开课  (选择方式二，如果你英语不太好，导致方式一，不可行)<br>    1、在Mac或者Window上，打开“浏览器”，然后进入 网易公开课首页 open.163.com<br>    2、貌似现在不能在网页端 下载网易的公开课，需要使用 “网易公开课”客户端<br>    3、那就 安装“网易公开课”客户端，之后 步骤与“iTunes U”相同</p>
+<p>方式三：YouTube （如果方式一、方式二，都找不到资料，那么选择方式三）<br>    1、使用Chrome翻墙上YouTube<br>    2、在Chrome中安装插件“saveFromNet”<br>    3、在YouTube中搜索“iOS”或“Swift”，然后使用插件“saveFromNet”下载这些公开课</p>
+<p>特别提醒：<br>    A、选择 iPad上面的“iTunes U”不仅可以听 “iOS或Swift”公开课，还可以“做笔记”，完成“作业” 等等，课程 笔记 作业，再也不用 分开了，么么哒！<br>    B、选择 iPad上面的“iBooks”可以下载苹果的官方文件，注意，使用美国区域的AppleID帐号，大陆的AppleID帐号 被墙了，fu*k ！<br>    C、下载 iPad上面的“Dash”可以查看各种语言的文档 ！</p>
+<p>就酱，开干吧！</p>
+<h4 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h4><p><a href="http://www.quora.com/What-are-the-best-resources-for-learning-iOS-development" target="_blank" rel="external">What are the best resources for learning iOS development?</a></p>
+<p><a href="www.objc.io">www.objc.io</a></p>
+<p><a href="http://rypress.com/tutorials/objective-c/index" target="_blank" rel="external">rypress.com</a></p>
+<p><a href="https://www.facebook.com/notes/apple-procare/free-ios-development-books-from-apple/135266913209357" target="_blank" rel="external">Free iOS Development Books from Apple</a></p>
+<p>Whether you are already an iOS developer or you’re looking to get started, you’re in luck. Apple is offering six free iOS development books to download through their iBooks app. The free development books are:</p>
+<ul>
+<li>iOS Human Interface Guidelines</li>
+<li>iOS Technology Overview</li>
+<li>Object Oriented Programming With Objective-C</li>
+<li>iOS Application Programming Guide</li>
+<li>Cocoa Fundamentals Guide</li>
+<li>The Objective-C Programming Language</li>
+</ul>
+<p>To download your own copies, launch iBooks, tap on “Store” and search for “Apple Developer Publications” where they’ll all be listed.</p>
+<p>Apple recommends grabbing the latest iBooks 1.2 update before downloading the free books. Due to the iBooks requirement, you’ll need either an iPhone, iPad, or iPod touch to download them for now, although I wouldn’t be too surprised to see iBooks come to the Mac when the Mac App Store is releasednext month.</p>
+<p>Considering the high cost of iPhone app development, grabbing a few free books and learning on your own may be the best way to have an app idea come to fruition.</p>
+<p><a href="http://www.openculture.com/2015/01/stanford-launches-free-course-on-developing-apps-with-ios-8.html" target="_blank" rel="external">Stanford Launches Free Course on Developing Apps with iOS 8</a></p>
+<p><a href="http://virtuousgiant.com/7-ways-to-learn-ios-develoment/" target="_blank" rel="external">7 Great Ways to Learn iOS Development</a></p>
+<p><a href="http://www.iphoneness.com/iphone-books/5-must-read-books-for-iphone-game-programmers/" target="_blank" rel="external">5 Must Read Books for iPhone Game Programmers</a></p>
+<p><a href="http://sanziro.com/2014/02/top-5-best-resources-learn-ios-app-programming.html" target="_blank" rel="external">Top 5 best resources to learn iOS app programming</a></p>
+<p><a href="http://stackoverflow.com/questions/783321/whats-the-best-way-of-learning-iphone-programming-when-coming-from-java" target="_blank" rel="external">What’s the best way of learning iPhone programming when coming from Java?</a></p>
+<p><a href="http://www.appcoda.com/book/learn-ios7-programming-from-scratch.html" target="_blank" rel="external">Learn iOS Programming from Scratch</a></p>
+<p><a href="http://www.infoq.com/news/2015/02/ios8-day-by-day-review" target="_blank" rel="external">iOS 8 Day by Day: Free Book on iOS 8 Programming</a></p>
+<p><a href="https://designcode.io/" target="_blank" rel="external">designcode.io</a></p>
+<p><a href="https://www.codefellows.org/blog/beginning-ios-development-books-stack-overflow-and-github" target="_blank" rel="external">Beginning iOS Development: Books, Stack Overflow and GitHub</a></p>
+<p><a href="http://www.whatsoniphone.com/blog/10must-read-books-for-ios-app-developers/" target="_blank" rel="external">10 must read books for iOS App developers</a></p>
+<p><a href="http://www.techrepublic.com/blog/software-engineer/five-books-that-every-apple-ios-developer-should-own/" target="_blank" rel="external">Five books that every Apple iOS developer should own</a></p>
+<p><a href="http://www.appdesignvault.com/5-books-to-help-you-become-an-ios-app-developer/" target="_blank" rel="external">5 Books to Help You Become an iOS App Developer</a></p>
+<p><a href="http://www.imooc.com/space/u/uid/481646" target="_blank" rel="external">慕课网iOS学习小组</a></p>
+<h4 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h4><hr>
+<p><a href="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iTunesU.jpeg" target="_blank" rel="external">iOS开发－iTunesU</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iTunesU.jpeg" alt="iOS开发－iTunesU"></p>
+<p><a href="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iBooks.jpeg" target="_blank" rel="external">iOS开发－iBooks</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-iBooks.jpeg" alt="iOS开发－iBooks"></p>
+<p><a href="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-skill-route.JPG" target="_blank" rel="external">iOS开发－SkillRoute</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-skill-route.JPG" alt="iOS开发－SkillRoute"></p>
+<p><a href="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-skill-tree.jpg" target="_blank" rel="external">iOS开发-SkillTree</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-Study-Lectures-Docs-skill-tree.jpg" alt="iOS开发-SkillTree"></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/10/5_SVN-to-Git/" rel="next" title="从 SVN 到 Git">
+                <i class="fa fa-chevron-left"></i> 从 SVN 到 Git
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/10/6_ObjC-JS-and-Native-WebView/" rel="prev" title="ObjC与JS交互的Native+WebView开发">
+                ObjC与JS交互的Native+WebView开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stanford公开课"><span class="nav-number">1.</span> <span class="nav-text">Stanford公开课</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站"><span class="nav-number">2.</span> <span class="nav-text">网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#书籍"><span class="nav-number">3.</span> <span class="nav-text">书籍</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/07/12/9_iOS-Study-Lectures-Docs/';
+      var disqus_title = "iOS公开课＋学习资料";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/07/12/9_iOS-Study-Lectures-Docs/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

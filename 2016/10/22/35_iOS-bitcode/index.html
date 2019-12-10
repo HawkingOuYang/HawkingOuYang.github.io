@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+遇见问题：bitcode12345ld: bitcode bundle could not be generated because &apos;/Users/OYXJ/Desktop/HomeTime/app/trunk/HomeTime_mobileUI/Project/Src/Library/SDK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中 bitcode 的故事">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/10/22/35_iOS-bitcode/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+遇见问题：bitcode12345ld: bitcode bundle could not be generated because &apos;/Users/OYXJ/Desktop/HomeTime/app/trunk/HomeTime_mobileUI/Project/Src/Library/SDK">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-aboutBitcode.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-appInfo.png">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-Mach-O-Type.png">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode_Xcode_archive_AppStoreReply.png">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-validate-architecture.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-WebRTC-supportBitcode.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-buildForAllArchitecture1.png">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-buildForAllArchitecture2.png">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-buildForAllArchitecture3.png">
+<meta property="og:updated_time" content="2019-01-17T03:35:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中 bitcode 的故事">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+遇见问题：bitcode12345ld: bitcode bundle could not be generated because &apos;/Users/OYXJ/Desktop/HomeTime/app/trunk/HomeTime_mobileUI/Project/Src/Library/SDK">
+<meta name="twitter:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-aboutBitcode.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/10/22/35_iOS-bitcode/">
+
+  <title> iOS中 bitcode 的故事 | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS中 bitcode 的故事
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-22T00:00:00+08:00" content="2016-10-22">
+              2016-10-22
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/22/35_iOS-bitcode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/10/22/35_iOS-bitcode/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<h5 id="遇见问题：bitcode"><a href="#遇见问题：bitcode" class="headerlink" title="遇见问题：bitcode"></a>遇见问题：bitcode</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ld: bitcode bundle could not be generated because '/Users/OYXJ/Desktop/HomeTime/app/trunk/HomeTime_mobileUI/Project/Src/Library/SDKs/libLeTVLoginSDK/libLeTVLoginSDK.a(Pods-LeTVLoginSDK-dummy.o)' was built without full bitcode. All object files and libraries for bitcode must be generated from Xcode Archive or <span class="keyword">Install</span> <span class="keyword">build</span> <span class="keyword">for</span> architecture arm64</div><div class="line">clang: <span class="keyword">error</span>: linker command <span class="keyword">failed</span> <span class="keyword">with</span> <span class="keyword">exit</span> code <span class="number">1</span> (<span class="keyword">use</span> -v <span class="keyword">to</span> see invocation)</div><div class="line"></div><div class="line">ld: bitcode bundle could <span class="keyword">not</span> be <span class="keyword">generated</span> because <span class="string">'/Users/OYXJ/Desktop/HomeTime/app/trunk/HomeTime_mobileUI/CustomFramework/CAbstractManager.framework/CAbstractManager'</span> was built <span class="keyword">without</span> <span class="keyword">full</span> bitcode. All frameworks <span class="keyword">and</span> dylibs <span class="keyword">for</span> bitcode must be <span class="keyword">generated</span> <span class="keyword">from</span> Xcode <span class="keyword">Archive</span> <span class="keyword">or</span> <span class="keyword">Install</span> <span class="keyword">build</span> <span class="keyword">for</span> architecture armv7</div><div class="line">clang: <span class="keyword">error</span>: linker command <span class="keyword">failed</span> <span class="keyword">with</span> <span class="keyword">exit</span> code <span class="number">1</span> (<span class="keyword">use</span> -v <span class="keyword">to</span> see invocation)</div></pre></td></tr></table></figure>
+<p>检验是否支持bitcode</p>
+<p>针对于静态链接库.framework文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool <span class="_">-l</span> libWeiboSDK.a | grep LLVM</div></pre></td></tr></table></figure></p>
+<p>针对于静态链接库.a文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -arch armv7 <span class="_">-l</span> xxxx.a | grep __bitcode | wc <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">I was able <span class="built_in">to</span> fix this <span class="keyword">by</span> adding <span class="string">"-fembed-bitcode"</span> <span class="built_in">to</span> Other C Flags <span class="keyword">of</span> <span class="keyword">the</span> project I am building <span class="keyword">a</span> static lib <span class="keyword">of</span>. </div><div class="line">It will give you <span class="keyword">a</span> warning because <span class="keyword">a</span> <span class="keyword">normal</span> build adds <span class="string">"-fembed-bitcode-marker"</span> but -fembed-bitcode takes precedence over <span class="keyword">the</span> dummy marker.</div><div class="line"></div><div class="line">需要在所有的.<span class="keyword">a</span>库在bundlsetting Other C Flags 添加-fembed-bitcode 或者你打包.<span class="keyword">a</span>的编译添加上此选项。</div></pre></td></tr></table></figure>
+<p><a href="http://www.cocoachina.com/ios/20151201/14432.html" target="_blank" rel="external">Bitcode适配指南</a></p>
+<p>这个方法已经过时了:<br><a href="https://blog.andyet.com/2015/10/20/building-webrtc-with-bitcode/" target="_blank" rel="external">Building WebRTC with Bitcode</a>,<br>估计要用官方的方法:<br><a href="https://codereview.webrtc.org/2478663002" target="_blank" rel="external">WebRTC  Enable bitcode on iOS</a><br>参考：<br><a href="https://bugs.chromium.org/p/webrtc/issues/detail?id=5085&amp;can=1&amp;q=bitcode&amp;colspec=ID%20Pri%20M%20ReleaseBlock%20Component%20Status%20Owner%20Summary" target="_blank" rel="external">chromium.org</a></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">最近才提交的Message was sent while issue was closed.</div><div class="line">On 2016/11/09 12:58:23, commit-bot: I haz the power wrote:</div><div class="line">Patchset 2 (id:??) landed as</div><div class="line">https://crrev.com/592baaf89aaf79245a55bfd3dbf47371b486cd03</div><div class="line">Cr-Commit-Position: refs/heads/master@&#123;<span class="comment">#14997&#125;</span></div><div class="line"></div><div class="line">Can you<span class="built_in"> check </span>that this doesn't break the framework builder?</div></pre></td></tr></table></figure>
+<h5 id="解释问题：bitcode"><a href="#解释问题：bitcode" class="headerlink" title="解释问题：bitcode"></a>解释问题：bitcode</h5><p>Xcode开启bitcode，然后archive，到处ipa之前，提示如下：<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-aboutBitcode.jpg" alt=""></p>
+<p>.xcarchive 文件的目录结构(注意不要泄漏符号文件dSYM)，如图：<a href="https://en.wikipedia.org/wiki/Fat_binary#Apple.27s_Universal_binary" target="_blank" rel="external">Fat_binary</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-appInfo.png" alt=""></p>
+<p><a href="http://stackoverflow.com/questions/31088618/impact-of-xcode-build-options-enable-bitcode-yes-no" target="_blank" rel="external">Impact of Xcode build options “Enable bitcode” Yes/No</a></p>
+<p>What is bitcode ？</p>
+<p>bitcode 是趋势，不可避免 要支持bitcode ——&gt; 根本原因在于：app越做越大，越来越多样化，硬件的cpu架构也比较多，很多用户的手机只有16G，所以要给app瘦身(减小安装包的大小)。总之：bitcode是针对于 硬件平台 (cpu架构，模拟器 x86 32 and 64 bit modes，设备：arm6/arm7/arm7s/arm64 等；屏幕尺寸 以及 分辨率@1x, @2x, @3x 等）；软件平台（操作系统 iOS8、iOS9、iOS10 等)，编译器 (LLVM、gcc、g++ 等)</p>
+<p>For distribution in the App Store, Apple will create separate versions of your app for each machine architecture (arm6/arm7/arm7s/arm64) instead of one app with a fat binary. This means the app installed on iOS devices will be smaller.</p>
+<p><a href="http://stackoverflow.com/questions/13082149/in-xcode-project-target-build-settings-what-is-mach-o-type" target="_blank" rel="external">In Xcode project target build settings, What is Mach-O Type?</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-Mach-O-Type.png" alt=""></p>
+<h5 id="可行方案：bitcode"><a href="#可行方案：bitcode" class="headerlink" title="可行方案：bitcode"></a>可行方案：bitcode</h5><p>们没针对所有的硬件平台编译<br>armv7 arm64 armv7s</p>
+<p>debug是可以编过的 应该就是没编译所有硬件架构导致的</p>
+<p>我让他们重新编译一下</p>
+<p>release是全平台的</p>
+<p>你们应该都是debug</p>
+<p>我是release模式下</p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode_Xcode_archive_AppStoreReply.png" alt=""></p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-validate-architecture.jpg" alt=""></p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-archive-WebRTC-supportBitcode.jpg" alt=""></p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-buildForAllArchitecture1.png" alt=""></p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-buildForAllArchitecture2.png" alt=""></p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-bitcode-Xcode-buildForAllArchitecture3.png" alt=""></p>
+<h5 id="方案总结：bitcode"><a href="#方案总结：bitcode" class="headerlink" title="方案总结：bitcode"></a>方案总结：bitcode</h5><p>1、bitcode 是趋势，不可避免 要支持bitcode ——&gt; 根本原因在于：app越做越大，越来越多样化，很多用户的手机只有16G，所以要给app瘦身(减小安装包的大小)<br>    Impact of Xcode build options “Enable bitcode” Yes/No<br>    <a href="http://stackoverflow.com/questions/31088618/impact-of-xcode-build-options-enable-bitcode-yes-no" target="_blank" rel="external">http://stackoverflow.com/questions/31088618/impact-of-xcode-build-options-enable-bitcode-yes-no</a></p>
+<p>2、开启bitcode没法看crash的函数栈 ——&gt;  之前存在这个问题，现在已经有成熟的解决方案。<br>    Downloading Bitcode dSYMs<br>    <a href="https://docs.fabric.io/apple/crashlytics/missing-dsyms.html" target="_blank" rel="external">https://docs.fabric.io/apple/crashlytics/missing-dsyms.html</a></p>
+<p>3、要能支持 但暂时不需要开启bitcode ——&gt;  CCoreData.framework  CAbstractManager.framework 要能支持，这两个独立的工程 编译的时候 就得打开 bitcode</p>
+<p>4、三方库 以后能不能支持bitcode  ——&gt; 三方库  也是 在 HomeTime工程里编译的，所以 能 支持 bitcode.</p>
+<p>5、WebRTC.framework  LeFaceSDK.framework  应该也能支持(这两个工程编译之前 打开 bitcode)，但实际情况 需要 试验一把。</p>
+<p>6、AppStore 审核 应该会过，Apple既然 这么提倡，我们 按照 Apple的要求做了，审核 应该会过。</p>
+<p>7、为了 加快 这次的 送审 速度，我已经  把 CCoreData.framework  CAbstractManager.framework 改成 不支持 bitcode，并且提交SVN。</p>
+<p>fabric</p>
+<p>Downloading Bitcode dSYMs<br><a href="https://docs.fabric.io/apple/crashlytics/missing-dsyms.html" target="_blank" rel="external">https://docs.fabric.io/apple/crashlytics/missing-dsyms.html</a></p>
+<p>For Bitcode enabled builds that have been released to the iTunes store or submitted to TestFlight, Apple generates new dSYMs. You’ll need to download the regenerated dSYMs from Xcode and then upload them to Crashlytics so that we can symbolicate crashes.</p>
+<p>dSYMs for Bitcode enabled apps can be downloaded from Xcode’s Organizer. Select the specific Archive of your app and then hit the “Download dSYMs…” button which will insert the Bitcode compiled dSYMs into the original Archive. Then, manually upload the dSYM to Crashlytics via the “Uploading Missing Bitcode dSYM” instructions.</p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/22/34_timestamp-timeInterval-in-iOS/" rel="next" title="iOS中 timestamp、timeInterval 的故事">
+                <i class="fa fa-chevron-left"></i> iOS中 timestamp、timeInterval 的故事
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/23/33_coursera-WebDev-HTML-CSS-Javascript/" rel="prev" title="面向 Web 开发者的 HTML、CSS 与 Javascript 课程">
+                面向 Web 开发者的 HTML、CSS 与 Javascript 课程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#遇见问题：bitcode"><span class="nav-number">1.</span> <span class="nav-text">遇见问题：bitcode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解释问题：bitcode"><span class="nav-number">2.</span> <span class="nav-text">解释问题：bitcode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可行方案：bitcode"><span class="nav-number">3.</span> <span class="nav-text">可行方案：bitcode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案总结：bitcode"><span class="nav-number">4.</span> <span class="nav-text">方案总结：bitcode</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/10/22/35_iOS-bitcode/';
+      var disqus_title = "iOS中 bitcode 的故事";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/10/22/35_iOS-bitcode/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

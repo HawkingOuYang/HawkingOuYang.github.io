@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+原材料：FFmpeg
+A native iOS video chat app based on WebRTC （视频聊天－单发版，这个好）本地文件夹：(8)  GitHub_Technique/apprtc-iosGitHub标星数量：197GitHub地址：https://github.com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS视频通话在GitHub的资料">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+原材料：FFmpeg
+A native iOS video chat app based on WebRTC （视频聊天－单发版，这个好）本地文件夹：(8)  GitHub_Technique/apprtc-iosGitHub标星数量：197GitHub地址：https://github.com">
+<meta property="og:updated_time" content="2019-01-17T03:35:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS视频通话在GitHub的资料">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+原材料：FFmpeg
+A native iOS video chat app based on WebRTC （视频聊天－单发版，这个好）本地文件夹：(8)  GitHub_Technique/apprtc-iosGitHub标星数量：197GitHub地址：https://github.com">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/">
+
+  <title> iOS视频通话在GitHub的资料 | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS视频通话在GitHub的资料
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-11T00:00:00+08:00" content="2016-09-11">
+              2016-09-11
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<h2 id="原材料："><a href="#原材料：" class="headerlink" title="原材料："></a>原材料：</h2><p><a href="http://ffmpeg.org/" target="_blank" rel="external">FFmpeg</a></p>
+<p>A native iOS video chat app based on WebRTC （视频聊天－单发版，这个好）<br>本地文件夹：(8)  GitHub_Technique/apprtc-ios<br>GitHub标星数量：197<br>GitHub地址：<a href="https://github.com/ISBX/apprtc-ios" target="_blank" rel="external">https://github.com/ISBX/apprtc-ios</a></p>
+<p>Agora Video Chat Demo App With QR Scan （多发版，这个好！）<br>本地文件夹：(8)  GitHub_Technique/AgoraDemoExtend<br>GitHub标星数量：14<br>GitHub地址：<a href="https://github.com/soapyigu/AgoraDemoExtend" target="_blank" rel="external">https://github.com/soapyigu/AgoraDemoExtend</a></p>
+<p>仿微信小视频 （蛮好的）<br>本地文件夹：(8)  GitHub_Technique/WeChatMicroVideo<br>GitHub标星数量：9<br>GitHub地址：<a href="https://github.com/MarineXmh/WeChatMicroVideo" target="_blank" rel="external">https://github.com/MarineXmh/WeChatMicroVideo</a></p>
+<p>App for SEVEN<br>本地文件夹：(8)  GitHub_Technique/VideoChatDemo_SnowyWhite<br>GitHub标星数量：2<br>GitHub地址：<a href="https://github.com/SnowyWhite/VideoChatDemo" target="_blank" rel="external">https://github.com/SnowyWhite/VideoChatDemo</a></p>
+<p>Demonstration of Video Chat app using opentok （swift写的）<br>本地文件夹：(8)  GitHub_Technique/VideoChatDemo_clevertrevor<br>GitHub标星数量：2<br>GitHub地址：<a href="https://github.com/clevertrevor/VideoChatDemo" target="_blank" rel="external">https://github.com/clevertrevor/VideoChatDemo</a></p>
+<p>iOS example app for realtime video chat using cine.io  <a href="https://www.cine.io/products/peer" target="_blank" rel="external">https://www.cine.io/products/peer</a><br>本地文件夹：(8)  GitHub_Technique/cineio-peer-ios-example-app<br>GitHub标星数量：4<br>GitHub地址：<a href="https://github.com/cine-io/cineio-peer-ios-example-app" target="_blank" rel="external">https://github.com/cine-io/cineio-peer-ios-example-app</a></p>
+<hr>
+<p>iPad video chat that lets you draw your emotions （这个代码好乱啊！）<br><a href="https://github.com/mgregory/SeeMeHearMeTouchMe" target="_blank" rel="external">https://github.com/mgregory/SeeMeHearMeTouchMe</a></p>
+<p>Sample-VideoChat-ios （没懂，怎么回事？）<br><a href="https://github.com/duzexu/Sample-VideoChat-ios" target="_blank" rel="external">https://github.com/duzexu/Sample-VideoChat-ios</a></p>
+<hr>
+<h2 id="问答："><a href="#问答：" class="headerlink" title="问答："></a>问答：</h2><p>可以用WebRTC来做视频直播吗？<br><a href="http://www.zhihu.com/question/25497090" target="_blank" rel="external">http://www.zhihu.com/question/25497090</a></p>
+<p>别迷信 WebRtc，WebRtc只适合小范围（8人以内）音视频会议，不适合做直播：</p>
+<ol>
+<li>视频部分：vpx的编码器太弱，专利原因不能用264，做的好的都要自己改264/265代码才行。</li>
+<li>音频部分：音频只适合人声编码，对音乐和其他非人声的效果很糟糕。</li>
+<li>网络部分：对国内各种奇葩网络适应性太低，网络糟糕点或者人多点就卡。</li>
+<li>信号处理：同时用过 GIPS和 WebRTC 进行对比，可以肯定目前开源的代码是GIPS阉割过的。</li>
+<li>使用规模：10人以内使用，超过10人就挂了，WebEx方案支持的人数都比 RTC 强。</li>
+</ol>
+<p>正确的方法是啥呢？<br>————————- 分割线 ————————-<br>让粉丝们来看直播，如果同时粉丝数&gt;10人，那么不关 WebRtc 鸟事，服务器请使用 nginx rtmp-module架设，架设好了用 ffmpeg 命令行来测试播摄像头。主播客户端请使用rtmp进行推流给rtmp-module，粉丝请使用 rtmp / flv + http stream 进行观看，PC-web端的粉丝请使用 Flash NetStream来观看，移动 web端的粉丝请使用 hls / m3u8 来观看。</p>
+<p>如果你试验成功要上线了，出现压力了，那么把nginx分层（接入层+交换层），稍微改两行代码，如果资金不足以全国部署服务器，那么把 nginx-rtmp-module 换为 cdn 的标准直播服务，也可以直接调过 nginx，一开始就用 cdn 的直播服务，比如网宿（斗鱼的直播服务提供商）。</p>
+<h2 id="这是正道，别走弯路了。"><a href="#这是正道，别走弯路了。" class="headerlink" title="这是正道，别走弯路了。"></a>这是正道，别走弯路了。</h2><p>作者：韦易笑<br>链接：<a href="http://www.zhihu.com/question/25497090/answer/72397450" target="_blank" rel="external">http://www.zhihu.com/question/25497090/answer/72397450</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>我所在的项目用这个技术两年多了，先说结论：完全可以！</p>
+<p>但是，凡事总有但是，也没那么简单。你以为调用几个Chrome的API就能直播了？too simple</p>
+<p>楼上 米小嘉 回答中的猜想是不正确的，WebRTC用的不是插件，是Chrome自带的功能，是原生js的API，也没有什么浏览器自带的插件。<br>楼上 煎饼果子社长 的方法也不对，WebRTC的API不仅仅是给你获取本地信源的，所谓RTC是real time communication的缩写，自然这套API是带传输功能的。所以获取图像信源之后不应该用websocket发送图像数据，而是直接用WebRTC的通信相关API发送图像和声音（这套API是同时支持图像和声音的）数据。</p>
+<p>所以，正确的方法是什么呢？<br>1、你得有一个实现了WebRTC相关协议的客户端。比如Chrome浏览器。<br>2、架设一个类似MCU系统的服务器。（不知道MCU是什么？看这：MCU（视频会议系统中心控制设备））</p>
+<p>第一步，用你的客户端，比如Chrome浏览器，通过WebRTC相关的媒体API获取图像及声音信源，再用WebRTC中的通信API将图像和声音数据发送到MCU服务器。<br>第二步，MCU服务器根据你的需求对图像和声音数据进行必要的处理，比如压缩、混音等。<br>第三步，需要看直播的用户，通过他们的Chrome浏览器，链接上你的MCU服务器，并收取服务器转发来的图像和声音流。</p>
+<p>先说步骤一，如果你只是做着玩玩，完全可以直接用Chrome浏览器做你的直播客户端。把摄像头麦克风连上电脑之后，Chrome可以用相关的js的API获取到摄像头和麦克风的数据。缺点就是如果长时间直播，Chrome的稳定性堪忧，我不是吓唬你。我们项目的经验是，chrome这样运行24小时以上内存占用很厉害，而且容易崩溃。</p>
+<p>第二步，你可能要问，WebRTC可以直接在浏览器之间P2P地传输流，为什么还要有中转的MCU服务器？因为Chrome的功能很弱，视频的分辨率控制、多路语音的混音都做不了，所以需要MCU参与。最重要的是，Chrome同时给6个客户端发视频流就很消耗资源了，所以你如果有超过10个用户收看的话，Chrome很容易崩溃。</p>
+<p>第三步就比较简单了，没什么好说的。</p>
+<p>最后最后，还是老话题，兼容性。你可以查一下现在支持的浏览器有款，IE据说支持，但是我们研究了一下好像他用的协议和Chrome不一样，不能互通。firefox和opera情况也不是很理想。</p>
+<p>————————-2015年11月17日 更新————————–<br>韦易笑 的答案中说“10人以内使用，超过10人就挂了”。从我个人的经验来看，我认为WebRTC并没有那么不堪。我不知道他是用什么样的方案，但是我原来的那个项目，13年做的结果是 1人广播，39人收看，在一台i3 + 4G + Centos6.4 mini的机器上跑MCU，连续运行48小时没有出现问题。CPU的使用率大概在60%左右，内存使用率是多少我记不清了，但是印象中不高，而且比较稳定。能不能支持更多的客户端我们没有尝试，因为当时已经满足我们的需求了。</p>
+<p>作者：刘津玮<br>链接：<a href="http://www.zhihu.com/question/25497090/answer/43395462" target="_blank" rel="external">http://www.zhihu.com/question/25497090/answer/43395462</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<hr>
+<p>HTML5新特性之WebRTC<br><a href="http://www.cnblogs.com/jscode/p/3601648.html" target="_blank" rel="external">http://www.cnblogs.com/jscode/p/3601648.html</a></p>
+<p>google为什么要开源webrtc</p>
+<p>google开源了WebRTC项目，网址是：<a href="http://code.google.com/p/webrtc/。" target="_blank" rel="external">http://code.google.com/p/webrtc/。</a></p>
+<p>　　WebRTC实现了基于网页的视频会议，标准是WHATWG 协议，目的是通过浏览器提供简单的javascript就可以达到实时通讯（Real-Time Communications (RTC)）能力。</p>
+<p>　　通过对源码的粗略分析，WebRTC提供了视频会议的核心技术，包括音视频的采集、编解码、网络传输、显示等功能，并且还支持跨平台：windows，linux，mac，android。</p>
+<p>　　WebRTC的视频处理分析（windows平台）</p>
+<p>　　WebRTC的视频部分，包含采集、编解码(I420/VP8)、加密、媒体文件、图像处理、显示、网络传输与流控(RTP/RTCP)等功能。</p>
+<p>　　视频采集—video_capture</p>
+<p>　　源代码在webrtc\modules\video_capture\main目录下，包含接口和各个平台的源代码。<br>　　在windows平台上，WebRTC采用的是dshow技术，来实现枚举视频的设备信息和视频数据的采集，这意味着可以支持大多数的视频采集设备；对那些需要单独驱动程序的视频采集卡（比如海康高清卡）就无能为力了。<br>　　视频采集支持多种媒体类型，比如I420、YUY2、RGB、UYUY等，并可以进行帧大小和帧率控制。</p>
+<p>　　视频编解码—video_coding<br>　　源代码在webrtc\modules\video_coding目录下。<br>　　WebRTC采用I420/VP8编解码技术。VP8是google收购ON2后的开源实现，并且也用在WebM项目中。VP8能以更少的数据提供更高质量的视频，特别适合视频会议这样的需求。</p>
+<p>　　视频加密–video_engine_encryption<br>　　视频加密是WebRTC的video_engine一部分，相当于视频应用层面的功能，给点对点的视频双方提供了数据上的安全保证，可以防止在Web上视频数据的泄漏。<br>　　视频加密在发送端和接收端进行加解密视频数据，密钥由视频双方协商，代价是会影响视频数据处理的性能；也可以不使用视频加密功能，这样在性能上会好些。<br>　　视频加密的数据源可能是原始的数据流，也可能是编码后的数据流。估计是编码后的数据流，这样加密代价会小一些，需要进一步研究。</p>
+<p>　　视频媒体文件–media_file<br>　　源代码在webrtc\modules\media_file目录下。<br>　　该功能是可以用本地文件作为视频源，有点类似虚拟摄像头的功能；支持的格式有Avi。<br>　　另外，WebRTC还可以录制音视频到本地文件，比较实用的功能。</p>
+<p>　　视频图像处理–video_processing<br>　　源代码在webrtc\modules\video_processing目录下。<br>　　视频图像处理针对每一帧的图像进行处理，包括明暗度检测、颜色增强、降噪处理等功能，用来提升视频质量。</p>
+<p>　　视频显示–video_render<br>　　源代码在webrtc\modules\video_render目录下。<br>　　在windows平台，WebRTC采用direct3d9和directdraw的方式来显示视频，只能这样，必须这样。</p>
+<p>　　网络传输与流控<br>　　对于网络视频来讲，数据的传输与控制是核心价值。WebRTC采用的是成熟的RTP/RTCP技术。</p>
+<p>　　WebRTC的音频处理分析（windows平台）</p>
+<p>　　WebRTC的音频部分，包含设备、编解码(iLIBC/iSAC/G722/PCM16/RED/AVT、NetEQ)、加密、声音文件、声音处理、声音输出、音量控制、音视频同步、网络传输与流控(RTP/RTCP)等功能。</p>
+<p>　　音频设备—audio_device<br>　　源代码在webrtc\modules\audio_device\main目录下，包含接口和各个平台的源代码。<br>　　在windows平台上，WebRTC采用的是Windows Core Audio和Windows Wave技术来管理音频设备，还提供了一个混音管理器。<br>　　利用音频设备，可以实现声音输出，音量控制等功能。</p>
+<p>　　音频编解码—audio_coding<br>　　源代码在webrtc\modules\audio_coding目录下。<br>　　WebRTC采用iLIBC/iSAC/G722/PCM16/RED/AVT编解码技术。<br>　　WebRTC还提供NetEQ功能—抖动缓冲器及丢包补偿模块，能够提高音质，并把延迟减至最小。<br>　　另外一个核心功能是基于语音会议的混音处理。</p>
+<p>　　声音加密–voice_engine_encryption<br>　　和视频一样，WebRTC也提供声音加密功能。</p>
+<p>　　声音文件<br>　　该功能是可以用本地文件作为音频源，支持的格式有Pcm和Wav。<br>　　同样，WebRTC也可以录制音频到本地文件。</p>
+<p>　　声音处理–audio_processing<br>　　源代码在webrtc\modules\audio_processing目录下。<br>　　声音处理针对音频数据进行处理，包括回声消除(AEC)、AECM、自动增益(AGC)、降噪处理等功能，用来提升声音质量。</p>
+<p>　　网络传输与流控<br>　　和视频一样，WebRTC采用的是成熟的RTP/RTCP技术。</p>
+<p>　　WebRTC的官网是<a href="http://www.webrtc.org/，其中的FAQ解答了很多大家关心的问题。有这么几点可以关注：" target="_blank" rel="external">http://www.webrtc.org/，其中的FAQ解答了很多大家关心的问题。有这么几点可以关注：</a><br>　　1.license<br>　　采用BSD licenses，可以用于商业软件；即使你修改了源代码，也不必公开你修改的部分。</p>
+<p>　　2.为什么WebRTC要免费<br>　　音视频针对目前的互联网应用，还是至关重要的。google这样做的目的，无非是吸引大量的开发者在chrome平台上开发音视频相关应用，和当年微软windows集成IE是一个道理。</p>
+<p>　　3.下载和编译<br>　　a).下载google的源码工具depot_tools：<br>　　svn co <a href="http://src.chromium.org/svn/trunk/tools/depot_tools" target="_blank" rel="external">http://src.chromium.org/svn/trunk/tools/depot_tools</a><br>　　并把depot_tools添加到系统的环境变量PATH里；<br>　　b).下载git工具：并把git添加到系统的环境变量PATH里；<br>　　c).创建webrtc工作目录，并在该目录下运行：<br>　　gclient config <a href="https://webrtc.googlecode.com/svn/trunk" target="_blank" rel="external">https://webrtc.googlecode.com/svn/trunk</a><br>　　gclient sync –force<br>　　<br>　　sync命令也会产生基于本地环境(Linux:make, OSX: XCode, Windows: Visual Studio)的build文件。</p>
+<p>　　也可以用命令：<br>　　gclient runhooks –force</p>
+<p>　　对windows平台，在trunk目录下，已经有针对Visual Studio的工程文件：<br>　　webrtc.sln</p>
+<p>　　好了，打开它，这就可以编译了。<br>　　<br>　　注：<br>　　webrtc默认使用了<br>　　C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\directshow\baseclasses。<br>　　<br>　　我的机器上只有v7.0的sdk，于是构造了一个v7.1的目录，<br>　　仅包含Samples\multimedia\directshow\baseclasses。
+　　</p>
+<p>重点在这里<br>专注RTC和音视频相关领域，支持开源，相关交流请关注微信公众号:blackerteam，或者发邮件到: blacker@rtc.help<br><a href="http://www.cnblogs.com/lingyunhu/category/626157.html" target="_blank" rel="external">http://www.cnblogs.com/lingyunhu/category/626157.html</a>    (这个很好)<br><a href="http://www.cnblogs.com/fangkm/category/670346.html" target="_blank" rel="external">http://www.cnblogs.com/fangkm/category/670346.html</a>   (这个补充)</p>
+<p>基于Web浏览器的实时通信系统（WebRTC）<br><a href="http://blog.chinaunix.net/uid-26000296-id-4841497.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-26000296-id-4841497.html</a></p>
+<hr>
+<h2 id="webrtc"><a href="#webrtc" class="headerlink" title="webrtc"></a>webrtc</h2><p><a href="http://quickblox.com/developers/Q-municate" target="_blank" rel="external">Q-municate - QuickBlox Developers (API docs, code samples, SDK)</a><br><a href="https://webrtc.org/quick-links/" target="_blank" rel="external">Quick Links | WebRTC</a><br><a href="https://www.webrtc-experiment.com/" target="_blank" rel="external">WebRTC Experiments &amp; Demos ® Muaz Khan</a><br><a href="https://webrtchacks.com/" target="_blank" rel="external">webrtcHacks</a><br><a href="https://www.w3.org/TR/webrtc/" target="_blank" rel="external">WebRTC</a><br><a href="https://webrtc.github.io/samples/" target="_blank" rel="external">WebRTC samples</a><br><a href="https://groups.google.com/forum/#!forum/discuss-webrtc" target="_blank" rel="external">discuss-webrtc</a><br><a href="https://w3c.github.io/webrtc-stats/" target="_blank" rel="external">Identifiers for WebRTC’s Statistics API</a><br><a href="http://webrtc.org.cn/" target="_blank" rel="external">WebRTC中文网-最权威的RTC实时通信平台</a></p>
+<p><a href="https://developer.apple.com/library/ios/navigation/" target="_blank" rel="external">ios</a><br><a href="http://en.cppreference.com/w/" target="_blank" rel="external">cpp</a><br><a href="https://openhub.net/" target="_blank" rel="external">Open Hub</a><br><a href="http://www.kjson.com/" target="_blank" rel="external">JSON在线工具</a><br><a href="https://tools.ietf.org/html/" target="_blank" rel="external">IETF</a></p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="external">Linux</a><br><a href="http://www.tldp.org/" target="_blank" rel="external">The Linux Documentation Project</a><br><a href="https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/" target="_blank" rel="external">FreeBSD 使用手册</a><br><a href="https://debian-handbook.info/browse/zh-CN/stable/index.html" target="_blank" rel="external">Debian 管理员手册</a></p>
+<h2 id="ffmpeg"><a href="#ffmpeg" class="headerlink" title="ffmpeg"></a>ffmpeg</h2><p>Install <code>ffplay</code> from the <code>ffmpeg</code> package.<br><a href="https://github.com/Homebrew/legacy-homebrew/issues/6880" target="_blank" rel="external">https://github.com/Homebrew/legacy-homebrew/issues/6880</a></p>
+<p>When you do brew install ffmpeg, it installs: ffmpeg, ffprobe, and ffserver. Missing from this list is ffplay. Can this be fixed? Thanks in advance!</p>
+<p>Do you have SDL installed? I think ffplay only builds if the SDL library is available.</p>
+<ol>
+<li>brew install sdl –use-gcc</li>
+<li>brew uninstall ffmpeg</li>
+<li>brew install ffmpeg –use-gcc</li>
+</ol>
+<p>Added a –with-ffplay option in cdcb773 that should take the guesswork out of knowing when installing FFmpeg will build ffplay.</p>
+<p>ffplay <a href="http://url-to-gif-or-audio-or-video" target="_blank" rel="external">http://url-to-gif-or-audio-or-video</a></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/10/7_ObjC-code-style-as-team/" rel="next" title="iOS团队代码规范（OC版）">
+                <i class="fa fa-chevron-left"></i> iOS团队代码规范（OC版）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/11/36_iOS-LiveStreaming-Research/" rel="prev" title="iOS直播调研">
+                iOS直播调研 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原材料："><span class="nav-number">1.</span> <span class="nav-text">原材料：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问答："><span class="nav-number">2.</span> <span class="nav-text">问答：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这是正道，别走弯路了。"><span class="nav-number">3.</span> <span class="nav-text">这是正道，别走弯路了。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webrtc"><span class="nav-number">4.</span> <span class="nav-text">webrtc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-number">5.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ffmpeg"><span class="nav-number">6.</span> <span class="nav-text">ffmpeg</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/';
+      var disqus_title = "iOS视频通话在GitHub的资料";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

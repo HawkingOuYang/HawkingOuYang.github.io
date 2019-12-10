@@ -1,0 +1,1057 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="HawkingOuYang, iOS developer, Tech. Memo">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+山寨QQ侧边栏交互
+山寨app store交互
+Masonry介绍与使用实践(快速上手Autolayout)
+Masonry源代码分析
+Masonry
+
+GitHub 上都有哪些值得关注学习的 iOS 开源项目？http://www.zhihu.com/question/22914651
+如果仅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub学习笔记">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/03/12/22_GitHub-Study-Notes/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+山寨QQ侧边栏交互
+山寨app store交互
+Masonry介绍与使用实践(快速上手Autolayout)
+Masonry源代码分析
+Masonry
+
+GitHub 上都有哪些值得关注学习的 iOS 开源项目？http://www.zhihu.com/question/22914651
+如果仅">
+<meta property="og:updated_time" content="2019-01-17T03:35:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitHub学习笔记">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+山寨QQ侧边栏交互
+山寨app store交互
+Masonry介绍与使用实践(快速上手Autolayout)
+Masonry源代码分析
+Masonry
+
+GitHub 上都有哪些值得关注学习的 iOS 开源项目？http://www.zhihu.com/question/22914651
+如果仅">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/03/12/22_GitHub-Study-Notes/">
+
+  <title> GitHub学习笔记 | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GitHub学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-12T00:00:00+08:00" content="2016-03-12">
+              2016-03-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/12/22_GitHub-Study-Notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/12/22_GitHub-Study-Notes/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<p><a href="http://url.cn/BK6vFz" target="_blank" rel="external">山寨QQ侧边栏交互</a></p>
+<p><a href="http://url.cn/LJGRcp" target="_blank" rel="external">山寨app store交互</a></p>
+<p><a href="http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/" target="_blank" rel="external">Masonry介绍与使用实践(快速上手Autolayout)</a></p>
+<p><a href="http://blog.csdn.net/colorapp/article/details/45030163" target="_blank" rel="external">Masonry源代码分析</a></p>
+<p><a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">Masonry</a></p>
+<hr>
+<p>GitHub 上都有哪些值得关注学习的 iOS 开源项目？<br><a href="http://www.zhihu.com/question/22914651" target="_blank" rel="external">http://www.zhihu.com/question/22914651</a></p>
+<p>如果仅按照 GitHub 月流行查看 Objective-C 项目的话有 ── Trending Objective-C repositories on GitHub this month</p>
+<p>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：吴辉斌<br>链接：<a href="http://www.zhihu.com/question/22914651/answer/25089054" target="_blank" rel="external">http://www.zhihu.com/question/22914651/answer/25089054</a><br>来源：知乎</p>
+<p>GitHub上有很多不错的iOS开源项目，个人认为不错的，有这么几个：</p>
+<ol>
+<li>ReactiveCocoa：ReactiveCocoa/ReactiveCocoa · GitHub：</li>
+</ol>
+<p>GitHub自家的函数式响应式编程范式的Objective-C实现，名字听着很高大上，学习曲线确实也比较陡，但是绝对会改变你对iOS编程的认知，首推之。</p>
+<ol>
+<li>Mantle：Mantle/Mantle · GitHub：</li>
+</ol>
+<p>又是GitHub自家的产物，轻量级建模的首选，也可以很好的配合CoreData工作。</p>
+<ol>
+<li>AFNetworking:AFNetworking/AFNetworking · GitHub:</li>
+</ol>
+<p>iOS7之前，苹果自带的网络库有多难用！matt大神的AFNetworking绝对可以解放你。使用苹果的NSURLRequest及iOS7的NSURLSession，清晰的架构，足够的文档，可以认为是第三方开源库的楷模了。</p>
+<ol>
+<li>BlocksKit: pandamonia/BlocksKit 路 GitHub</li>
+</ol>
+<p>本人相当偏爱Functional Programming，Objective-C中的block绝对满足我的口味。但想用好block也不是很容易，如果对block有爱，就请使用这个库吧。</p>
+<ol>
+<li>Nimbus：jverkoey/nimbus · GitHub</li>
+</ol>
+<p>第一次关注nimbus是因为Facebook的Three20开源库。可惜Three20库已死，主要作者跳出来，写了nimbus。</p>
+<ol>
+<li>pop: facebook/pop · GitHub</li>
+</ol>
+<p>facebook出品的paper，动画效果太好了，赶超apple的原生app一大截。pop就是paper的动画库！</p>
+<ol>
+<li>GPUImage: BradLarson/GPUImage ยท GitHub</li>
+</ol>
+<p>iOS7出来时，很多好看的效果，其实都是对图像的各种处理（比如模糊效果）。图像处理看来以后也是iOS开发的必备技能之一了。而GPUImage，就是能快速处理各种图像效果的利器！</p>
+<hr>
+<p>好吧，我承认第一次知乎的回答有点惊喜，没想到这么多人点赞 ^_^</p>
+<p>大部分iOS的第三方库都是在苹果的基础框架之上的产物，所以基础很重要，有时间看看WWDC的历年视频，是不错的选择。</p>
+<p>最近还是在深入学习ReactiveCocoa，看ReactiveCocoa的源码。对响应式编程还是有很多期待的，有时间也要重温函数式编程（比如Haskell），或者把响应式编程的公开课（Coursera.org）看完。编程范式的选择可以说是相当重要的。未来是多核+并发的时代，函数式编程无疑是更好的选择。</p>
+<p>iOS的UI也很重要，但是如果理解apple的CoreAnimation及CoreGraphics框架，大部分UI基本是没问题的。当前，iOS7的各种炫酷效果，也需要对图像的处理有一定理解。说到图形学，OpenCV是一个不错的选择，而OpenGL也是另一个不错的方向（推荐的公开课：Interactive 3D Graphics Course With Three.js &amp; WebGL）。</p>
+<p>当然最重要的，还是计算机的各种基础知识了吧，知其然，知其所以然，才是正道～</p>
+<p>以上是个人的经验，欢迎交流讨论～</p>
+<p>GitHub 上有哪些完整的 iOS-App 源码值得参考？</p>
+<p>题主是一名自学的初级 ios 开发者，做 app 练手时懂得原理，不太会构造和把自己构思的原型转换成代码。所以求助知友们，分享一些源码参考学习下吧。</p>
+<p>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：yuxingxin<br>链接：<a href="http://www.zhihu.com/question/28518265/answer/67664861" target="_blank" rel="external">http://www.zhihu.com/question/28518265/answer/67664861</a><br>来源：知乎</p>
+<p>以下是我整理的iOS开源App的一部分,其中不乏有许多不错的项目，后续更多都会整理在:iOS开源项目 - MobDevGroup上</p>
+<ul>
+<li><p>iBBS-Swift</p>
+</li>
+<li><p>一款用Swift写的BBS客户端</p>
+</li>
+<li><p>SmallDay</p>
+</li>
+<li><p>用Swift 实现的高仿小日子</p>
+</li>
+<li><p>Swift-Radio-Pro</p>
+</li>
+<li><p>Professional Radio Station App, created w/ Swift 2.0</p>
+</li>
+<li><p>zulip-ios</p>
+</li>
+<li><p>Dropbox收购公司内部社交服务商Zulip,然后全部开源，这是iOS App</p>
+</li>
+<li><p>DesignerNewsApp</p>
+</li>
+<li><p>Build a Swift App as a designer</p>
+</li>
+<li><p>firefox-ios</p>
+</li>
+<li><p>Firefox for iOS</p>
+</li>
+<li><p>iphone-app</p>
+</li>
+<li><p>开源中国的iPhone客户端源码</p>
+</li>
+<li><p>Git@OSC</p>
+</li>
+<li><p>Git@OSC iPhone 客户端，方便用户查看Git@OSC的项目以及简单的操作issue等</p>
+</li>
+<li><p>Coding</p>
+</li>
+<li><p>Coding官方客户端 GitHub地址</p>
+</li>
+<li><p>Coding iPad版</p>
+</li>
+<li><p>Coding官方客户端</p>
+</li>
+<li><p>iOSSF</p>
+</li>
+<li><p>SegmentFault官方App</p>
+</li>
+<li><p>ioctocat</p>
+</li>
+<li><p>GitHub第三方客户端</p>
+</li>
+<li><p>iTunesPicker</p>
+</li>
+<li><p>类似AppStore的一个应用</p>
+</li>
+<li><p>Doppio</p>
+</li>
+<li><p>寻找最近的星巴克</p>
+</li>
+<li><p>swiftmi-app</p>
+</li>
+<li><p>swift迷 - 专业的Apple swift开发中文社区 app版本 采用Swift实现</p>
+</li>
+<li><p>Cheddar</p>
+</li>
+<li><p>一个日程管理的App</p>
+</li>
+<li><p>BeeFancy</p>
+</li>
+<li><p>仿Fancy官方APP的WIREFRAME，基于BeeFramework</p>
+</li>
+<li><p>Anypic</p>
+</li>
+<li><p>类似于Instagram的一款App</p>
+</li>
+<li><p>SXNews</p>
+</li>
+<li><p>模仿网易新闻做的精仿网易新闻</p>
+</li>
+<li><p>iReddit</p>
+</li>
+<li><p>Reddit iPhone客户端</p>
+</li>
+<li><p>readdit</p>
+</li>
+<li><p>Reddit iPad客户端</p>
+</li>
+<li><p>豆瓣相册</p>
+</li>
+<li><p>Slowslab iOS应用 豆瓣相册 精选集 开源项目</p>
+</li>
+<li><p>ChatSecure-iOS</p>
+</li>
+<li><p>Objective-C写的XMPP聊天应用</p>
+</li>
+<li><p>NotificationChat</p>
+</li>
+<li><p>Objective-C写的完整的聊天应用</p>
+</li>
+<li><p>Swift-ZhihuDaily</p>
+</li>
+<li><p>用Swift实现的仿知乎日报应用</p>
+</li>
+<li><p>FakeZhihuDaily</p>
+</li>
+<li><p>仿知乎日报iOS客户端</p>
+</li>
+<li><p>edhita</p>
+</li>
+<li><p>用Swift实现的iOS平台开源文本编辑器。</p>
+</li>
+<li><p>ruby-china-for-ios</p>
+</li>
+<li><p>RubyChina官方客户端</p>
+</li>
+<li><p>Meizi</p>
+</li>
+<li><p>豆瓣妹子图iOS客户端</p>
+</li>
+<li><p>HackerNews</p>
+</li>
+<li><p>用Swift写的Hacker News 阅读 iOS App</p>
+</li>
+<li><p>SwiftHN</p>
+</li>
+<li><p>另外一个用Swift写的Hacker News 阅读App</p>
+</li>
+<li><p>News-YC</p>
+</li>
+<li><p>Hacker News阅读类iOS App</p>
+</li>
+<li><p>twidere</p>
+</li>
+<li><p>twitter 第三方客户端</p>
+</li>
+<li><p>2048</p>
+</li>
+<li><p>用SpriteKit实现的2048游戏</p>
+</li>
+<li><p>PlainReader</p>
+</li>
+<li><p>一款 iOS(iPhone + iPad) 新闻类客户端，内容抓取自 <a href="http://cnBeta.com" target="_blank" rel="external">http://cnBeta.com</a></p>
+</li>
+<li><p>swift-2048</p>
+</li>
+<li><p>用Swift实现的2048游戏</p>
+</li>
+<li><p>iOS-2048</p>
+</li>
+<li><p>用Objective-C实现的2048游戏</p>
+</li>
+<li><p>FlappySwift</p>
+</li>
+<li><p>用swift实现的flappy bird游戏</p>
+</li>
+<li><p>ECMobile_iOS</p>
+</li>
+<li><p>基于ECShop的手机商城客户端</p>
+</li>
+<li><p>kxmovie</p>
+</li>
+<li><p>用ffmpeg写的iOS视频播放器</p>
+</li>
+<li><p>wikipedia-ios</p>
+</li>
+<li><p>维基百科官方App, 已上架</p>
+</li>
+<li><p>Sol</p>
+</li>
+<li><p>漂亮的扁平风格的天气App</p>
+</li>
+<li><p>Project-RainMan</p>
+</li>
+<li><p>用Swift写的天气类App</p>
+</li>
+<li><p>SwiftWeather</p>
+</li>
+<li><p>用Swift写的天气类App</p>
+</li>
+<li><p>v2ex</p>
+</li>
+<li><p>v2ex第三方iOS客户端</p>
+</li>
+<li><p>V2EXClient</p>
+</li>
+<li><p>Swift实现的V2EX iOS客户端</p>
+</li>
+<li><p>VPNOn</p>
+</li>
+<li><p>VPN连接管理,支持Apple Watch,已上架</p>
+</li>
+<li><p>Monkey</p>
+</li>
+<li><p>GitHub第三方iOS客户端</p>
+</li>
+<li><p>JokeClient-Swift</p>
+</li>
+<li><p>基于swift,用糗事百科的API简单做了一个糗百客户端,可以浏览各种段子,浏览搞笑图片,查看精彩评论等.</p>
+</li>
+<li><p>Watch</p>
+</li>
+<li><p>Dribbble第三方客户端</p>
+</li>
+<li><p>MyOne-iOS</p>
+</li>
+<li><p>用OC写的《一个》 iOS 客户端</p>
+</li>
+<li><p>BaiduFM-Swift</p>
+</li>
+<li><p>百度FM swift语言实现</p>
+</li>
+<li><p>WNXHuntForCity</p>
+</li>
+<li><p>高仿城觅2.0 by-objective-c</p>
+</li>
+<li><p>Tomate</p>
+</li>
+<li><p>圆盘式计时器</p>
+</li>
+<li><p>eigen</p>
+</li>
+<li><p>The Art World in Your Pocket or Your Trendy Tech Company’s Tote, Artsy’s iOS app.</p>
+</li>
+<li><p>WWDC</p>
+</li>
+<li><p>WWDC app for OS X</p>
+</li>
+<li><p>Voice2Note</p>
+</li>
+<li><p>懒人笔记iOS客户端</p>
+</li>
+<li><p>viewfinder</p>
+</li>
+<li><p>移动支付公司 Square 将去年收购的照片应用 Viewfinder 开源了，包含服务端、iOS 和 Android 应用代码</p>
+</li>
+<li><p>RSSRead</p>
+</li>
+<li><p>“已阅”（iOS上开源RSS新闻阅读器）</p>
+</li>
+<li><p>breadwallet</p>
+</li>
+<li><p>breadwallet iOS bitcoin wallet</p>
+</li>
+<li><p>novel-design</p>
+</li>
+<li><p>品趣iOS客户端</p>
+</li>
+<li><p>Brushes</p>
+</li>
+<li><p>iPhone和iPad上的画图软件</p>
+</li>
+<li><p>Concurrency</p>
+</li>
+<li><p>货币换算软件</p>
+</li>
+<li><p>WhoCall</p>
+</li>
+<li><p>谁CALL我 - iOS来电信息语音提醒</p>
+</li>
+<li><p>Mogo-iOS</p>
+</li>
+<li><p>Mogo群聊客户端</p>
+</li>
+<li><p>WWDC-2014</p>
+</li>
+<li><p>WWDC客户端</p>
+</li>
+<li><p>the-oakland-post</p>
+</li>
+<li><p>Swift写的Oakland客户端</p>
+</li>
+<li><p>GreatReader</p>
+</li>
+<li><p>GreatReader PDF阅读客户端</p>
+</li>
+<li><p>Tropos</p>
+</li>
+<li><p>天气客户端</p>
+</li>
+<li><p>manong-reading</p>
+</li>
+<li><p>《猿已阅》码农周刊iOS客户端</p>
+</li>
+</ul>
+<p>后期可以持续关注移动开发在线分享站，分类整理移动开发相关资源。</p>
+<p>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：刘科比<br>链接：<a href="http://www.zhihu.com/question/28518265/answer/41300573" target="_blank" rel="external">http://www.zhihu.com/question/28518265/answer/41300573</a><br>来源：知乎</p>
+<p>初学者有了一些基础后，读源码是很好的学习和进阶方式，但是一定要选对源码、选好源码。刚才还在某社区怒喷别人分享的烂资源误人子弟，分享一些二把刀子写的「高仿XXX」源码，真是不能忍。如果你问我喷对我有啥好处，能想到的只有两个字：情（zhuang）怀（b）。</p>
+<p>OK，下面推荐几个业界良心，awesome系列：</p>
+<p><a href="https://github.com/vsouza/awesome-ios" target="_blank" rel="external">https://github.com/vsouza/awesome-ios</a></p>
+<p><a href="https://github.com/joeljfischer/awesome-apple" target="_blank" rel="external">https://github.com/joeljfischer/awesome-apple</a></p>
+<p>Swift：</p>
+<p>matteocrippa/awesome-swift · GitHub</p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/06/18_ObjC-RunTime-Practices/" rel="next" title="ObjC的RunTime以及项目实践">
+                <i class="fa fa-chevron-left"></i> ObjC的RunTime以及项目实践
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/18/23_Stanford-Study-Notes/" rel="prev" title="Stanford公开课笔记">
+                Stanford公开课笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/03/12/22_GitHub-Study-Notes/';
+      var disqus_title = "GitHub学习笔记";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/03/12/22_GitHub-Study-Notes/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

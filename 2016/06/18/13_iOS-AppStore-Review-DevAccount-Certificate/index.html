@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+&amp;copy;OYXJ &amp;rarr; 以下图片，可能泄漏之前公司的部分商业机密？如果如此，我立即删除；但觉得只是资源的命名规则，应该算不上。
+AppStore审核Distributing iOS Apps With iTunes Connect — 这个很好 !
+iOS Provisioning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AppStore审核、iOS开发证书、iOS开发者帐号、Daily Build">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/06/18/13_iOS-AppStore-Review-DevAccount-Certificate/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+&amp;copy;OYXJ &amp;rarr; 以下图片，可能泄漏之前公司的部分商业机密？如果如此，我立即删除；但觉得只是资源的命名规则，应该算不上。
+AppStore审核Distributing iOS Apps With iTunes Connect — 这个很好 !
+iOS Provisioning">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_7.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_AppReview_1.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_1.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_2.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_3.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_4.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_5.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_6.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_8.jpg">
+<meta property="og:updated_time" content="2019-01-17T03:35:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AppStore审核、iOS开发证书、iOS开发者帐号、Daily Build">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+&amp;copy;OYXJ &amp;rarr; 以下图片，可能泄漏之前公司的部分商业机密？如果如此，我立即删除；但觉得只是资源的命名规则，应该算不上。
+AppStore审核Distributing iOS Apps With iTunes Connect — 这个很好 !
+iOS Provisioning">
+<meta name="twitter:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_7.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/06/18/13_iOS-AppStore-Review-DevAccount-Certificate/">
+
+  <title> AppStore审核、iOS开发证书、iOS开发者帐号、Daily Build | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AppStore审核、iOS开发证书、iOS开发者帐号、Daily Build
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-18T00:00:00+08:00" content="2016-06-18">
+              2016-06-18
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/18/13_iOS-AppStore-Review-DevAccount-Certificate/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/18/13_iOS-AppStore-Review-DevAccount-Certificate/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<p>&copy;OYXJ &rarr; 以下图片，可能泄漏之前公司的部分商业机密？如果如此，我立即删除；但觉得只是资源的命名规则，应该算不上。</p>
+<h4 id="AppStore审核"><a href="#AppStore审核" class="headerlink" title="AppStore审核"></a>AppStore审核</h4><p><a href="http://code.tutsplus.com/tutorials/distributing-ios-apps-with-itunes-connect--cms-21672" target="_blank" rel="external">Distributing iOS Apps With iTunes Connect — 这个很好 !</a></p>
+<p><a href="http://blog.csdn.net/phunxm/article/details/42685597" target="_blank" rel="external">iOS Provisioning Profile(Certificate)与Code Signing详解</a></p>
+<p><a href="http://blog.csdn.net/htttw/article/details/7939405" target="_blank" rel="external">证书申请1</a><br><a href="http://www.cnblogs.com/heyonggang/p/3497467.html" target="_blank" rel="external">证书申请2</a></p>
+<p><a href="http://blog.csdn.net/a416863220/article/details/46117053" target="_blank" rel="external">微信分享屏蔽跳转appstore解决方法</a></p>
+<p><a href="https://developer.apple.com/support/account/" target="_blank" rel="external">Account Management</a></p>
+<p><a href="http://stackoverflow.com/questions/11374039/delete-a-device-from-my-developer-account-to-increase-the-count" target="_blank" rel="external">Delete a device from my developer account to increase the count</a></p>
+<p><a href="http://stackoverflow.com/questions/16318927/how-can-i-delete-an-ios-device-on-my-ios-device-list" target="_blank" rel="external">How can I Delete an iOS device on my iOS Device list?</a></p>
+<p><a href="http://apple.stackexchange.com/questions/25465/can-deleted-device-be-reallocated-in-the-developer-portal" target="_blank" rel="external">Can deleted device be reallocated in the Developer Portal?</a></p>
+<p><a href="http://stackoverflow.com/questions/3030889/what-happens-to-my-apps-after-my-developer-account-membership-expires" target="_blank" rel="external">What happens to my apps after my developer account membership expires</a></p>
+<p><a href="http://stackoverflow.com/questions/10736580/ios-developer-enterprise-program-membership-renewal-before-expiration" target="_blank" rel="external">iOS Developer Enterprise Program membership Renewal Before Expiration</a></p>
+<p><a href="http://stackoverflow.com/questions/9159842/how-to-remove-version-of-iphone-application-from-apple-app-store" target="_blank" rel="external">how to remove version of iPhone application from apple app store?</a></p>
+<p><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/nm.1.html" target="_blank" rel="external">查下项目里哪用到了这个私有api</a></p>
+<h5 id="上架AppStore，资料准备，格式"><a href="#上架AppStore，资料准备，格式" class="headerlink" title="上架AppStore，资料准备，格式"></a>上架AppStore，资料准备，格式</h5><p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_7.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_7.jpg"></p>
+<h5 id="加急审核？"><a href="#加急审核？" class="headerlink" title="加急审核？"></a>加急审核？</h5><p><a href="http://appreviewtimes.com/" target="_blank" rel="external">下方图片源自 &rarr;  appreviewtimes.com</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_AppReview_1.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_AppReview_1.jpg"></p>
+<p><a href="https://developer.apple.com/support/app-review/" target="_blank" rel="external">Apple审核 &rarr; Apple</a></p>
+<p>等待审核<em>超过7天</em>写信，我写给Apple的信<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Dear Sir/Ma’am,</div><div class="line"></div><div class="line">     According <span class="built_in">to</span> <span class="keyword">the</span> regular review period <span class="keyword">of</span> App Store Review, </div><div class="line">     which is <span class="number">7</span> days (i.e. <span class="keyword">a</span> workweek) , </div><div class="line">     <span class="keyword">as</span> seen <span class="keyword">in</span> <span class="keyword">http</span>://appreviewtimes.com/ And  <span class="keyword">https</span>://developer.apple.com/support/app-review/ ,</div><div class="line">     but <span class="number">10</span> days have been passed, considering that our app submits <span class="keyword">for</span> review <span class="keyword">on</span> <span class="title">Nov</span>. <span class="title">27</span>, </div><div class="line">     <span class="keyword">and</span> our app is still <span class="keyword">in</span> <span class="keyword">the</span> review status “waiting <span class="keyword">for</span> review”. </div><div class="line">     Please kindly make sure that you did <span class="keyword">not</span> skip our app, </div><div class="line">     <span class="keyword">and</span> remember <span class="built_in">to</span> review our app. </div><div class="line"></div><div class="line">     Thank you very much <span class="keyword">for</span> your effort <span class="keyword">and</span> <span class="built_in">time</span>.</div><div class="line"></div><div class="line">iOS Development Team</div><div class="line">Dec. <span class="number">6</span>, <span class="number">2015.</span> China Time</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">Dear Sir/Ma'am,</div><div class="line"></div><div class="line">     As the version of 3.0.4, which is already on App Store,</div><div class="line"></div><div class="line">     A fatal bug was found in our APP that a ViewController(i.e. “入园离园”) </div><div class="line">     could not <span class="keyword">load</span> <span class="keyword">any</span> <span class="keyword">data</span> <span class="keyword">from</span> <span class="keyword">server</span>, </div><div class="line">     which caused the relevant <span class="keyword">module</span> <span class="keyword">always</span> <span class="keyword">show</span> blank <span class="keyword">with</span> <span class="keyword">only</span> a spinning indicator. </div><div class="line"></div><div class="line">     We have so <span class="keyword">far</span> received tens <span class="keyword">of</span> thousands <span class="keyword">of</span> complains <span class="keyword">from</span> users. </div><div class="line">    </div><div class="line">     The occurred problem has been solved <span class="keyword">in</span> <span class="keyword">version</span> <span class="number">3.0</span><span class="number">.5</span>, </div><div class="line">     <span class="keyword">and</span> <span class="keyword">now</span> we need an urgent &amp; <span class="keyword">fast</span> review <span class="keyword">of</span> our APP <span class="keyword">to</span> </div><div class="line">     ensure the <span class="keyword">normal</span> operation. </div><div class="line"></div><div class="line">     Your nice <span class="keyword">and</span> timely <span class="keyword">help</span> will be warmly appreciated.</div><div class="line"></div><div class="line">     Thank you very much.</div><div class="line"></div><div class="line">iOS Development Team</div><div class="line">Oct. <span class="number">27</span>, <span class="number">2015.</span> China Time.</div></pre></td></tr></table></figure>
+<p>iWoMail 6.3.1 加急审核</p>
+<p>情况说明：</p>
+<p>解锁了iOS开发者账号，看到沃邮箱6.3.0通过审核了，但是很久还没有上架，顺便把沃邮箱上架了，但是悲剧了。</p>
+<p>由于安卓端的问题,把超级登陆的接口给停了，所以沃邮箱iOS6.3.0登录没法用 ！</p>
+<p>网上搜了一下：能够在App Store上移除最近刚刚发布的软件版本，从而保留上一个版本？结果是：NO！</p>
+<p>参考：<br><a href="http://stackoverflow.com/questions/9159842/how-to-remove-version-of-iphone-application-from-apple-app-store" target="_blank" rel="external">how to remove version of iPhone application from apple app store?</a></p>
+<p>我已经看过了。只能是 两种选择：</p>
+<p>（1）下架－－－ 显然不能这么做，因为运营要推广沃邮箱的话，App Store上根本搜索不到沃邮箱。</p>
+<p>或者</p>
+<p>（2）有一个办法：把 6.2.3的代码 重新打包 成 新版本 6.3.1，然后提交审核，加急审核。</p>
+<p>对于（2）的详细说明：<br>注意1:  从appStore_6.2.3分支, 搞一个 新的分支 appStore_6.3.1分支，Xcode配置，改成 Version 6.3.1  Build 20160125.1 ，这里Version必须大于已经上架的6.3.0 ，<br>审核被拒绝之后，Version 可以保持不变，只需要递增 build即可，build 按照 日期来填。<br>注意2:  请测试人员 用6.3.1 覆盖安装 6.3.0，测试一下数据库，会不会奔溃？<br>注意3:  请服务端人员 把沃邮箱iOS版本6.3.1 的审核状态 改成 审核中。</p>
+<p>加急审核的理由如下：</p>
+<p>中文：</p>
+<p>最近上架的版本（Version 6.3.0  Build 20160108.1）存在一个严重的的bug，服务端的超级登陆接口停用了，导致用户无法登录；但是App Store上无法回滚软件的版本，所以只好拿上一个版本的代码，重新打包 成6.3.1，提交审核，并发起加急审核，希望得到审核人员的帮助，使得新版本6.3.1尽快上架。</p>
+<p>英文：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Dear Sir/Ma'am,</div><div class="line"></div><div class="line">   As <span class="keyword">of</span> <span class="keyword">the</span> LAST binary bundle which we <span class="keyword">put</span> <span class="keyword">on</span> App Store ( i.e. Version <span class="number">6.3</span><span class="number">.0</span>  Build <span class="number">20160108.1</span>) ,</div><div class="line">   we've found a Fatal bug <span class="keyword">that</span> users can <span class="keyword">not</span> login <span class="keyword">by</span> registrating their mobile phones, </div><div class="line">   which <span class="keyword">is</span> caused <span class="keyword">by</span> changing <span class="keyword">of</span> Server Interface, worse still, Server Interface can <span class="keyword">not</span> be fixed <span class="keyword">in</span> a short <span class="built_in">time</span>, </div><div class="line">   meanwhile App Store <span class="keyword">does</span> <span class="keyword">not</span> support Reverting Version <span class="keyword">of</span> App, </div><div class="line">   so we re-make an binary bundle (Version <span class="number">6.3</span><span class="number">.1</span>) <span class="keyword">that</span> <span class="keyword">is</span> build <span class="keyword">with</span> exactly <span class="keyword">the</span> same code <span class="keyword">with</span> <span class="keyword">the</span> Version <span class="number">6.2</span><span class="number">.3</span> Build <span class="number">2015.11</span><span class="number">.23</span> </div><div class="line">   (<span class="keyword">as</span> you can see <span class="keyword">in</span> App Store review history, this binary bundle was successfully approved), </div><div class="line">   except one thing <span class="comment">---- Version and Build are different. </span></div><div class="line">   So we need an EXPEDITE review <span class="keyword">to</span> make sure <span class="keyword">that</span> <span class="keyword">the</span> fewer users are affected, </div><div class="line">   <span class="keyword">the</span> fewer <span class="keyword">the</span> better, we really appreciate your timely support <span class="keyword">and</span> your warmly help.</div><div class="line"></div><div class="line">iOS Development Team</div><div class="line">Jan. <span class="number">26</span>, <span class="number">2016.</span> China Time.</div></pre></td></tr></table></figure>
+<p>说明：Apple审核的效率越来越高了，以前“两周”，后来“一周”，现在“一两天”，所以一般也不用<code>加急审核</code>，上面这英文是我以前写的，如果现在要加急，用“中文”写也行，因为AppStore审核 三个地点：美国、日本、香港，90%以上的App在美国审核，那边有华裔负责AppStore审核这项工作，有时候还会打电话过来(电话说中文)。</p>
+<p><a href="https://developer.apple.com/appstore/contact/appreviewteam/index.html" target="_blank" rel="external">加急审核入口  &rarr;  Apple</a></p>
+<h4 id="iOS开发证书"><a href="#iOS开发证书" class="headerlink" title="iOS开发证书"></a>iOS开发证书</h4><h4 id="iOS开发者帐号"><a href="#iOS开发者帐号" class="headerlink" title="iOS开发者帐号"></a>iOS开发者帐号</h4><h4 id="Daily-Build"><a href="#Daily-Build" class="headerlink" title="Daily Build"></a>Daily Build</h4><p><a href="http://www.kuqin.com/shuoit/20151216/349477.html" target="_blank" rel="external">漫谈iOS程序的证书和签名机制</a></p>
+<h5 id="package-ios-ali-py"><a href="#package-ios-ali-py" class="headerlink" title="package-ios-ali.py"></a>package-ios-ali.py</h5><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/<span class="keyword">env</span> <span class="keyword">python</span></div><div class="line">#coding:utf<span class="number">-8</span></div><div class="line"></div><div class="line"></div><div class="line">import os,sys,time</div><div class="line">import subprocess</div><div class="line"></div><div class="line">def copyconfig(projectaddr,resourceaddr,version,versionstring):</div><div class="line">        </div><div class="line">    filename=<span class="string">'%s/anbang_ios/anbang_ios-Info.plist'</span>  %(projectaddr)</div><div class="line">    try:</div><div class="line">        pcommand=<span class="string">'cp -rf %s/ALY/AppIcon.appiconset %s/anbang_ios/Images.xcassets/AppIcon.appiconset'</span>   %(resourceaddr,projectaddr)</div><div class="line">	<span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line"></div><div class="line">        pcommand=<span class="string">'cp -rf %s/ALY/AddressDefine.h %s/anbang_ios/Define'</span>   %(resourceaddr,projectaddr)</div><div class="line">	<span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line">	</div><div class="line">	pcommand=<span class="string">'cp -rf %s/ALY/anbang_ios-Info.plist %s/anbang_ios/'</span>   %(resourceaddr,projectaddr)</div><div class="line">	<span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line"></div><div class="line">		</div><div class="line">	pcommand=<span class="string">'rm -rf %s/ABOrganization/*'</span>  %(projectaddr)</div><div class="line">        <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line"></div><div class="line">                </div><div class="line">        pcommand=<span class="string">'cp -rf %s/ALY/1435646730000.db %s/anbang_ios/ABOrganization/'</span>   %(resourceaddr,projectaddr)</div><div class="line">	<span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line"></div><div class="line">        pcommand=<span class="string">"sed -i.bak '/&lt;key&gt;CFBundleShortVersionString&lt;\/key&gt;/,/&lt;string&gt;.*&lt;\/string&gt;/ s@&lt;string&gt;.*&lt;/string&gt;@&lt;string&gt;%s&lt;/string&gt;@' %s"</span>  %(versionstring,filename)</div><div class="line">        <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line">                </div><div class="line"></div><div class="line">        pcommand=<span class="string">"sed -i.bak '/&lt;key&gt;CFBundleVersion&lt;\/key&gt;/,/&lt;string&gt;.*&lt;\/string&gt;/ s@&lt;string&gt;.*&lt;/string&gt;@&lt;string&gt;%s&lt;/string&gt;@' %s"</span>  %(version,filename)</div><div class="line">        <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">        <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line"></div><div class="line">    except Exception,e:</div><div class="line">        <span class="keyword">print</span> e</div><div class="line">	<span class="keyword">print</span> <span class="string">'Now will exit building'</span></div><div class="line">	sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">			</div><div class="line"></div><div class="line">def build_ios(projectaddr,resourceaddr,destaddr,path,version):</div><div class="line"> </div><div class="line"> <span class="keyword">file</span>=<span class="string">'%s/ALY/bbchat.mobileprovision'</span> %(resourceaddr)</div><div class="line"> file2=<span class="string">'%s/anbang_ios'</span> %(projectaddr)</div><div class="line"> name=<span class="string">'bbchat.ipa'</span></div><div class="line"> try:</div><div class="line">  os.<span class="keyword">chdir</span>(projectaddr)</div><div class="line">  pcommand=<span class="string">'security unlock-keychain -p "asiainfo"  ~/Library/Keychains/login.keychain'</span></div><div class="line">  <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">  <span class="keyword">print</span> <span class="string">'command result=[%s]'</span> %(os.<span class="keyword">system</span>(pcommand))</div><div class="line"></div><div class="line">  pcommand=<span class="string">'xcodebuild -configuration "Release" -target "anbang_ios" -sdk iphoneos clean build'</span></div><div class="line">  <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">  <span class="keyword">print</span> <span class="string">'command result=[%s]'</span> %(os.<span class="keyword">system</span>(pcommand))</div><div class="line"></div><div class="line">  </div><div class="line">  #pcommand=<span class="string">'xcrun -sdk iphoneos PackageApplication -v /Users/apple/.jenkins/jobs/ios-ali/workspace/build/Release-iphoneos/anbang_ios.app -o /opt/bbchat.ipa --sign "iPhone Distribution: ANBANG INSURANCE LTD." --embed %s'</span> %(<span class="keyword">file</span>)</div><div class="line">  pcommand=<span class="string">'xcrun -sdk iphoneos PackageApplication -v %s/build/Release-iphoneos/anbang_ios.app -o /opt/packagesource/ios/bbchat.ipa --sign "iPhone Distribution: ANBANG INSURANCE LTD." --embed %s'</span> %(projectaddr,<span class="keyword">file</span>)</div><div class="line">  <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">  <span class="keyword">print</span> <span class="string">'command result=[%s]'</span> %(os.<span class="keyword">system</span>(pcommand))</div><div class="line">  </div><div class="line">  #ssh(destaddr,name,path,version)</div><div class="line">  os.<span class="keyword">system</span>(<span class="string">'/opt/iosupload.sh'</span> + <span class="string">' '</span> + destaddr +<span class="string">'/'</span>+ name)</div><div class="line">  os.<span class="keyword">chdir</span>(destaddr)</div><div class="line">  pcommand=<span class="string">'rm -rf *'</span></div><div class="line">  <span class="keyword">print</span> <span class="string">'excecute command:[%s]'</span> %pcommand</div><div class="line">  <span class="keyword">print</span> os.<span class="keyword">system</span>(pcommand)</div><div class="line">  </div><div class="line"></div><div class="line"> except Exception,e:</div><div class="line">  <span class="keyword">print</span> e</div><div class="line">  <span class="keyword">print</span> <span class="string">'Now will exit building'</span></div><div class="line">  sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">	projectaddr=<span class="string">'/Users/apple/.jenkins/jobs/ios-ali/workspace'</span></div><div class="line">	resourceaddr=<span class="string">'/opt/resource/ios/reset'</span></div><div class="line">        destaddr=<span class="string">'/opt/packagesource/ios'</span></div><div class="line">        version=sys.argv[<span class="number">1</span>]</div><div class="line">        versionstring=sys.argv[<span class="number">2</span>]</div><div class="line">	path=<span class="string">'ALIYUN'</span></div><div class="line">	copyconfig(projectaddr,resourceaddr,version,versionstring)</div><div class="line">	time.sleep(<span class="number">2</span>)</div><div class="line">	build_ios(projectaddr,resourceaddr,destaddr,version)</div></pre></td></tr></table></figure>
+<h5 id="打包命名-待改进"><a href="#打包命名-待改进" class="headerlink" title="打包命名(待改进)"></a>打包命名(待改进)</h5><p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_1.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_1.jpg"></p>
+<p>iOS_AppStore<br>iOS_AdHoc<br>iOS_Enterprise<br>iOS_Dev<br>调整顺序：<br>bundleID<strong>version显示版本号</strong>build内部构建版本号<strong>iOS<em>AppStore</em>打包日期  .ipa<br>bundleID</strong>version显示版本号<strong>build内部构建版本号</strong>iOS<em>Enterprise</em>打包日期  .ipa<br>bundleID<strong>version显示版本号</strong>build内部构建版本号<strong>iOS<em>AdHoc</em>打包日期  .ipa<br>bundleID</strong>version显示版本号<strong>build内部构建版本号</strong>iOS<em>Dev</em>打包日期  .ipa</p>
+<p>把ipa的名字，写详细了。<br>cn.wo.3ikids.parents互动宝宝家长端3.1.0AppStore151113      请更改为更详细的命名<br>cn.wo.3ikids.parents互动宝宝家长端_version3.1.0_build20151116_AppStore151116<br>其中：version3.1.0  －－－－这里 3.1.0            为显示版本号(在AppStore中显示的版本号)<br>           build20151116  －－－这里 20151116    为构建版本号(这个开发人员内部使用)<br>          AppStore151116   －－这里151116         为2015年11月16号，打包ipa，用于上传AppStore。<br>对应Xcode中<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_2.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_2.jpg"></p>
+<h5 id="配置文件命名-待改进"><a href="#配置文件命名-待改进" class="headerlink" title="配置文件命名(待改进)"></a>配置文件命名(待改进)</h5><p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_3.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_3.jpg"></p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_4.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_4.jpg"></p>
+<p>配置文件：<br>bundleID<strong>iOS_AppStore</strong>配置文件制作日期  .mobileprofile<br>bundleID<strong>iOS_InHouse</strong>配置文件制作日期  .mobileprofile<br>bundleID<strong>iOS_AdHoc</strong>配置文件制作日期  .mobileprofile<br>bundleID<strong>iOS_Dev</strong>配置文件制作日期  .mobileprofile</p>
+<h5 id="证书命名-待改进"><a href="#证书命名-待改进" class="headerlink" title="证书命名(待改进)"></a>证书命名(待改进)</h5><p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_5.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_5.jpg"></p>
+<h5 id="总体命名-待改进"><a href="#总体命名-待改进" class="headerlink" title="总体命名(待改进)"></a>总体命名(待改进)</h5><p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_6.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_6.jpg"></p>
+<h5 id="打包之后，保留的文件-待改进"><a href="#打包之后，保留的文件-待改进" class="headerlink" title="打包之后，保留的文件(待改进)"></a>打包之后，保留的文件(待改进)</h5><p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-AppStore-Review-DevAccount-Certificate_8.jpg" alt="iOS-AppStore-Review-DevAccount-Certificate_8.jpg"></p>
+<h5 id="版本命名规则"><a href="#版本命名规则" class="headerlink" title="版本命名规则"></a>版本命名规则</h5><p>版本号 命名错误： 只能是3位整数，用英文句号 . 隔开。<br>以前可以4位整数的，苹果更严格了。貌似现在 又可以 4位整数了 ？</p>
+<p><a href="http://stackoverflow.com/questions/4933093/cfbundleversion-in-the-info-plist-upload-error" target="_blank" rel="external">CFBundleVersion in the Info.plist Upload Error （这个好，权威）</a></p>
+<p><a href="http://stackoverflow.com/questions/25418798/cfbundleversion-must-be-a-period-separated-list-of-at-most-three-non-negative-in" target="_blank" rel="external">CFBundleVersion must be a period separated list of at most three non negative integers</a></p>
+<p><a href="http://stackoverflow.com/questions/6701948/efficient-way-to-compare-version-strings-in-java" target="_blank" rel="external">Efficient way to compare version strings in Java</a></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSDictionary</span> *infoDictionary = [[<span class="built_in">NSBundle</span> mainBundle] infoDictionary];</div><div class="line"><span class="built_in">NSString</span> *appDisplayVersion = [infoDictionary objectForKey:<span class="string">@"CFBundleShortVersionString"</span>];<span class="comment">//当前App显示版本号</span></div><div class="line"><span class="built_in">NSString</span> *appBuildVersion = [infoDictionary objectForKey:<span class="string">@"CFBundleVersion"</span>];<span class="comment">//当前App构建版本号</span></div><div class="line"><span class="built_in">BOOL</span> isNewVersion = [version compare:appDisplayVersion options:<span class="built_in">NSNumericSearch</span>] == <span class="built_in">NSOrderedDescending</span>;<span class="comment">//比较 `数字`，降序。</span></div></pre></td></tr></table></figure>
+<p>这里，iOS版本比较逻辑 与 下面Java逻辑 一致。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * <span class="type">Compares</span> two version strings.</div><div class="line"> *</div><div class="line"> * <span class="type">Use</span> this instead <span class="keyword">of</span> <span class="type">String</span>.compareTo() <span class="keyword">for</span> a non-lexicographical</div><div class="line"> * comparison that works <span class="keyword">for</span> version strings. e.g. <span class="string">"1.10"</span>.compareTo(<span class="string">"1.6"</span>).</div><div class="line"> *</div><div class="line"> * @note <span class="type">It</span> does <span class="keyword">not</span> work <span class="keyword">if</span> <span class="string">"1.10"</span> <span class="keyword">is</span> supposed to be equal to <span class="string">"1.10.0"</span>.</div><div class="line"> *</div><div class="line"> * @param str1 a <span class="built_in">string</span> <span class="keyword">of</span> ordinal numbers separated by decimal points.</div><div class="line"> * @param str2 a <span class="built_in">string</span> <span class="keyword">of</span> ordinal numbers separated by decimal points.</div><div class="line"> * @<span class="keyword">return</span> <span class="type">The</span> <span class="literal">result</span> <span class="keyword">is</span> a negative integer <span class="keyword">if</span> str1 <span class="keyword">is</span> _numerically_ less than str2.</div><div class="line"> *         <span class="type">The</span> <span class="literal">result</span> <span class="keyword">is</span> a positive integer <span class="keyword">if</span> str1 <span class="keyword">is</span> _numerically_ greater than str2.</div><div class="line"> *         <span class="type">The</span> <span class="literal">result</span> <span class="keyword">is</span> zero <span class="keyword">if</span> the strings are _numerically_ equal.</div><div class="line"> */</div><div class="line">public <span class="keyword">static</span> <span class="built_in">int</span> versionCompare(<span class="type">String</span> str1, <span class="type">String</span> str2) &#123;</div><div class="line">    <span class="type">String</span>[] vals1 = str1.split(<span class="string">"\\."</span>);</div><div class="line">    <span class="type">String</span>[] vals2 = str2.split(<span class="string">"\\."</span>);</div><div class="line">    <span class="built_in">int</span> i = <span class="number">0</span>;</div><div class="line">    // <span class="built_in">set</span> index to first non-equal ordinal <span class="keyword">or</span> length <span class="keyword">of</span> shortest version <span class="built_in">string</span></div><div class="line">    <span class="keyword">while</span> (i &lt; vals1.length &amp;&amp; i &lt; vals2.length &amp;&amp; vals1[i].equals(vals2[i])) &#123;</div><div class="line">      i++;</div><div class="line">    &#125;</div><div class="line">    // compare first non-equal ordinal number</div><div class="line">    <span class="keyword">if</span> (i &lt; vals1.length &amp;&amp; i &lt; vals2.length) &#123;</div><div class="line">        <span class="built_in">int</span> diff = <span class="type">Integer</span>.valueOf(vals1[i]).compareTo(<span class="type">Integer</span>.valueOf(vals2[i]));</div><div class="line">        <span class="keyword">return</span> <span class="type">Integer</span>.signum(diff);</div><div class="line">    &#125;</div><div class="line">    // the strings are equal <span class="keyword">or</span> one <span class="built_in">string</span> <span class="keyword">is</span> a substring <span class="keyword">of</span> the other</div><div class="line">    // e.g. <span class="string">"1.2.3"</span> = <span class="string">"1.2.3"</span> <span class="keyword">or</span> <span class="string">"1.2.3"</span> &lt; <span class="string">"1.2.3.4"</span></div><div class="line">    <span class="keyword">return</span> <span class="type">Integer</span>.signum(vals1.length - vals2.length);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>版本号 递增命名，比如：</p>
+<p>version   2.0               (用户看到的)</p>
+<p>build     2.0.2016090901 （开发者 看到的）</p>
+<p>说明：2.0.2016090901  含义是 目标版本2.0，在2016年09月09日这天，第01次 提交给AppStore审核。</p>
+<p>当时有一个问题：</p>
+<p>安卓的标准 versionCode是数字</p>
+<p>服务端，比较版本(依赖于Android)，使用 整型。</p>
+<p>iOS端，比较版本，使用 字符。</p>
+<p>所以，服务端要求： iOS端 按照Android 的逻辑走。</p>
+<p>但是，iOS端 version build 命名是这样的：</p>
+<p>1、第一版  version1.0   build1.0.14<br>2、第二版 version1.1   build1.1.2<br>3、第三版  version1.1.1 build1.1.1.0</p>
+<p>iOS端 应该 要求 服务端走这种逻辑，如下：（但是 现在 服务端 走Android的“整型 比较版本”的逻辑）</p>
+<p>所以：iOS端 的 version 和 build 命名，要按照 Android走，同时 iOS写代码，把 “字符 版本” 变成 “整型 版本” (不得不说，这样真不靠谱)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> *  输入版本号 例如1.1.1  返回 10101 五位数的版本号</div><div class="line"> *  @note (逻辑跟随Andriod，不得不说，这样真不靠谱)</div><div class="line"> *</div><div class="line"> *  @param version 本地的版本号</div><div class="line"> *</div><div class="line"> *  @<span class="built_in">return</span> 5位数的版本号</div><div class="line"> */</div><div class="line">+ ( NSUInteger)intergerVersionWithVersionString:(NSString *)version</div><div class="line">&#123;</div><div class="line">    NSArray * versionArray = [version componentsSeparatedByString:@<span class="string">"."</span>];</div><div class="line">    <span class="keyword">if</span> (versionArray.count&lt;3) &#123;</div><div class="line">        <span class="built_in">return</span> 0; /* 避免 崩溃 */</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    NSString *<span class="built_in">local</span>First 	 = versionArray[0];</div><div class="line">    NSString *<span class="built_in">local</span>Second	 = versionArray[1];</div><div class="line">    NSString *<span class="built_in">local</span>Third 	 = versionArray[2];</div><div class="line">    </div><div class="line">    NSUInteger <span class="built_in">local</span>FirstInteger 		= [<span class="built_in">local</span>First 	<span class="built_in">integer</span>Value];</div><div class="line">    NSUInteger <span class="built_in">local</span>SecondInteger 	= [<span class="built_in">local</span>Second 	<span class="built_in">integer</span>Value];</div><div class="line">    NSUInteger <span class="built_in">local</span>ThirdInteger 	= [<span class="built_in">local</span>Third 	<span class="built_in">integer</span>Value];</div><div class="line">    </div><div class="line">    NSUInteger <span class="built_in">local</span>VersionInteger = <span class="built_in">local</span>FirstInteger *10000 +</div><div class="line">    						       <span class="built_in">local</span>SecondInteger *100 +</div><div class="line">    						       <span class="built_in">local</span>ThirdInteger;</div><div class="line">    </div><div class="line">    <span class="built_in">return</span> <span class="built_in">local</span>VersionInteger;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/25/16_ReactiveCocoa-ReactNative-Hybrid-NativeScript-OC-Swift-JavaScript/" rel="next" title="ReactiveCocoa、ReactNative、Hybrid、NativeScript、OC、Swift、JavaScript">
+                <i class="fa fa-chevron-left"></i> ReactiveCocoa、ReactNative、Hybrid、NativeScript、OC、Swift、JavaScript
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/19/12_Tool-Sublime-PlantUML/" rel="prev" title="使用 Sublime + PlantUML 高效地画图：业务流程图、业务时序图、架构组件图 等">
+                使用 Sublime + PlantUML 高效地画图：业务流程图、业务时序图、架构组件图 等 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AppStore审核"><span class="nav-number">1.</span> <span class="nav-text">AppStore审核</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#上架AppStore，资料准备，格式"><span class="nav-number">1.1.</span> <span class="nav-text">上架AppStore，资料准备，格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加急审核？"><span class="nav-number">1.2.</span> <span class="nav-text">加急审核？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS开发证书"><span class="nav-number">2.</span> <span class="nav-text">iOS开发证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS开发者帐号"><span class="nav-number">3.</span> <span class="nav-text">iOS开发者帐号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Daily-Build"><span class="nav-number">4.</span> <span class="nav-text">Daily Build</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#package-ios-ali-py"><span class="nav-number">4.1.</span> <span class="nav-text">package-ios-ali.py</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打包命名-待改进"><span class="nav-number">4.2.</span> <span class="nav-text">打包命名(待改进)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件命名-待改进"><span class="nav-number">4.3.</span> <span class="nav-text">配置文件命名(待改进)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#证书命名-待改进"><span class="nav-number">4.4.</span> <span class="nav-text">证书命名(待改进)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总体命名-待改进"><span class="nav-number">4.5.</span> <span class="nav-text">总体命名(待改进)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打包之后，保留的文件-待改进"><span class="nav-number">4.6.</span> <span class="nav-text">打包之后，保留的文件(待改进)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#版本命名规则"><span class="nav-number">4.7.</span> <span class="nav-text">版本命名规则</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/06/18/13_iOS-AppStore-Review-DevAccount-Certificate/';
+      var disqus_title = "AppStore审核、iOS开发证书、iOS开发者帐号、Daily Build";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/06/18/13_iOS-AppStore-Review-DevAccount-Certificate/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+&amp;copy; OYXJ
+iOS唯一ID：UDID，UUID，Mac地址，advertisingIdentifier，identifierForVendor，KeyChain。
+设备唯一 idiOS 标识 设备id ？&amp;rarr; FCUUID
+为什么，使用 FCUUID， 因为：
+12345/*">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS唯一ID：UDID，UUID，advertisingIdentifier，identifierForVendor，KeyChain。">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/02/02/19_iOS-UDID-UUID-advertisingIdentifier-identifierForVendor/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+&amp;copy; OYXJ
+iOS唯一ID：UDID，UUID，Mac地址，advertisingIdentifier，identifierForVendor，KeyChain。
+设备唯一 idiOS 标识 设备id ？&amp;rarr; FCUUID
+为什么，使用 FCUUID， 因为：
+12345/*">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_1.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_2.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_3.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_4.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_5.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_6.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_7.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_8.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_9.jpg">
+<meta property="og:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_10.jpg">
+<meta property="og:updated_time" content="2019-01-17T03:35:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS唯一ID：UDID，UUID，advertisingIdentifier，identifierForVendor，KeyChain。">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+&amp;copy; OYXJ
+iOS唯一ID：UDID，UUID，Mac地址，advertisingIdentifier，identifierForVendor，KeyChain。
+设备唯一 idiOS 标识 设备id ？&amp;rarr; FCUUID
+为什么，使用 FCUUID， 因为：
+12345/*">
+<meta name="twitter:image" content="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/02/02/19_iOS-UDID-UUID-advertisingIdentifier-identifierForVendor/">
+
+  <title> iOS唯一ID：UDID，UUID，advertisingIdentifier，identifierForVendor，KeyChain。 | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS唯一ID：UDID，UUID，advertisingIdentifier，identifierForVendor，KeyChain。
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-02T00:00:00+08:00" content="2016-02-02">
+              2016-02-02
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/02/19_iOS-UDID-UUID-advertisingIdentifier-identifierForVendor/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/02/19_iOS-UDID-UUID-advertisingIdentifier-identifierForVendor/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<p>&copy; OYXJ</p>
+<p>iOS唯一ID：UDID，UUID，Mac地址，advertisingIdentifier，identifierForVendor，KeyChain。</p>
+<h4 id="设备唯一-id"><a href="#设备唯一-id" class="headerlink" title="设备唯一 id"></a>设备唯一 id</h4><p>iOS 标识 设备id ？&rarr; <a href="https://github.com/fabiocaccamo/FCUUID" target="_blank" rel="external">FCUUID</a></p>
+<p>为什么，使用 FCUUID， 因为：</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"><span class="type">Method</span> [[<span class="type">UIDevice</span> currentDevice] uniqueIdentifier] <span class="keyword">is</span> <span class="keyword">not</span> allowed <span class="built_in">any</span> more</div><div class="line">http://stackoverflow.com/questions/<span class="number">9396187</span>/<span class="keyword">method</span>-uidevice-currentdevice-uniqueidentifier-<span class="keyword">is</span>-<span class="keyword">not</span>-allowed-<span class="built_in">any</span>-more-i-ne</div><div class="line">*/</div><div class="line">[[<span class="type">UIDevice</span> currentDevice] uniqueIdentifier];</div></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * iOS <span class="number">6.0</span></div><div class="line"> * <span class="keyword">use</span> wifi<span class="symbol">'s</span> mac address</div><div class="line"> */</div><div class="line"> + (NSString*)_UDID_iOS6</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [SvUDIDTools getMacAddress];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">/*</span></div><div class="line"> * iOS 7.0</div><div class="line"> * Starting from iOS 7, the system always returns the value 02:00:00:00:00:00 </div><div class="line"> * when you ask for the MAC address on any device.</div><div class="line"> * use identifierForVendor + keyChain</div><div class="line"> * make sure UDID consistency atfer app delete and reinstall</div><div class="line"> */</div><div class="line"> + (<span class="built_in">NSString</span>*)_UDID_iOS7</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [[<span class="built_in">UIDevice</span> currentDevice].identifierForVendor UUIDString];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 但是<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIDevice currentDevice].identifierForVendor UUIDString]<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>identifierForVendor 不靠谱，因为：<br>app被用户删掉之后，identifierForVendor会变化。</p>
+<p>advertisingIdentifier 也不行，因为：<br>app中使用 advertisingIdentifier，导入 AdSupport.framework, 但实际上“app的界面中看不到广告”，那么，AppStore审核时 被拒绝！</p>
+<p>所以，用 <a href="https://github.com/fabiocaccamo/FCUUID" target="_blank" rel="external">FCUUID</a><br>请相信开源的力量，并且我亲测有效(也请相信我)，看：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  uuidForDevice PERSISTS for: System reboot、System upgrade、System reset。</div><div class="line"> *  <span class="doctag">@attention</span>  System reset (persists only if the user restores a device backup which includes also keychain's data)</div><div class="line"> *</div><div class="line"> *  <span class="doctag">@return</span> uuidForDevice</div><div class="line"> */</div><div class="line">+ (NSString *_Nonnull)uuidForDevice</div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span>  [FCUUID uuidForDevice];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="UDID"><a href="#UDID" class="headerlink" title="UDID"></a>UDID</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*! @brief  生成一个唯一id</span></div><div class="line"> *</div><div class="line"> *  @attention 可以用于本地数据库 实体的ID（即主键 like the primary key in the database）</div><div class="line"> *</div><div class="line"> *  @note  UUID (Universally Unique Identifier): A sequence of 128 bits that can guarantee uniqueness across space and time, defined by RFC 4122.</div><div class="line"> *</div><div class="line"> *  @return 唯一id字符串，形如：E621E1F8-C36C-495A-93FC-0C247A3E6E5F</div><div class="line"> */</div><div class="line">+ (<span class="built_in">NSString</span> *_Nonnull)generateUUID</div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     http://nshipster.com/uuid-udid-unique-identifier/</div><div class="line">     http://stackoverflow.com/questions/21872233/differences-between-udid-and-uuid</div><div class="line">     UUID (Universally Unique Identifier): A sequence of 128 bits that can guarantee uniqueness across space and time, defined by RFC 4122.</div><div class="line">     */</div><div class="line">    <span class="built_in">CFUUIDRef</span> identifier = <span class="built_in">CFUUIDCreate</span>(<span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">CFStringRef</span> identifierStringRef = <span class="built_in">CFUUIDCreateString</span>(<span class="literal">NULL</span>, identifier);</div><div class="line">    <span class="built_in">CFRelease</span>(identifier);</div><div class="line">    </div><div class="line">    <span class="built_in">NSString</span> *identifierString = (__bridge <span class="built_in">NSString</span> *)identifierStringRef;</div><div class="line">    </div><div class="line">    <span class="built_in">NSString</span> *uuid = [<span class="built_in">NSString</span> stringWithString:identifierString];</div><div class="line">    <span class="built_in">CFRelease</span>(identifierStringRef);</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> uuid;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*! @brief  生成一个唯一id</span></div><div class="line"> *</div><div class="line"> *  @note GUID (Globally Unique Identifier): Microsoft’s implementation of the UUID specification; often used interchangeably with UUID.</div><div class="line"> *</div><div class="line"> *  @return 唯一id字符串，相比于：E621E1F8-C36C-495A-93FC-0C247A3E6E5F</div><div class="line"> *            但是去除"-"，形如：E621E1F8C36C495A93FC0C247A3E6E5F</div><div class="line"> */</div><div class="line">+ (<span class="built_in">NSString</span> *_Nonnull)createGUID</div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     http://nshipster.com/uuid-udid-unique-identifier/</div><div class="line">     GUID (Globally Unique Identifier): Microsoft’s implementation of the UUID specification; often used interchangeably with UUID.</div><div class="line">     */</div><div class="line">    <span class="built_in">NSMutableString</span> *guid = (<span class="built_in">NSMutableString</span> *)[[<span class="built_in">NSUUID</span> UUID] UUIDString];</div><div class="line">    <span class="keyword">return</span> [guid stringByReplacingOccurrencesOfString:<span class="string">@"-"</span> withString:<span class="string">@""</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  根据时间(精确到毫秒) 生成唯一id （这个不是 “跨设备唯一”的，特别注意）</div><div class="line"> *</div><div class="line"> *  @return 根据时间(精确到毫秒) 生成唯一id，形如：yyyyMMddHHmmssSSS98 其中98是随机数字</div><div class="line"> */</div><div class="line">+ (<span class="built_in">NSString</span> *_Nonnull)locationTimeID</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSDateFormatter</span> *dateToStrFormatter = [[<span class="built_in">NSDateFormatter</span> alloc] init];</div><div class="line">    [dateToStrFormatter setDateFormat:<span class="string">@"yyyyMMddHHmmssSSS"</span>];</div><div class="line">    <span class="built_in">NSString</span> *strDate = [dateToStrFormatter stringFromDate:[<span class="built_in">NSDate</span> date]];</div><div class="line"></div><div class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@%d"</span>, strDate, (arc4random() % <span class="number">100</span>)];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  当前app的bundleID。</div><div class="line"> *</div><div class="line"> *  @note   自动判断是否 通配符bundleID，若是，则会处理: 在最后拼接［ "_％@", app名字全拼 ］，形如‘软件1’：com.example.*_ruanjian1</div><div class="line"> *</div><div class="line"> *  @return 当前app的bundleID，自动判断是否 通配符bundleID，若是，则会处理 在最后拼接［ "_％@", app全拼 ］</div><div class="line"> */</div><div class="line">+ (NSString *_Nonnull)appBundleIdentifier</div><div class="line">&#123;</div><div class="line">    static NSString *<span class="keyword">bundleID </span>= nil<span class="comment">;</span></div><div class="line">    </div><div class="line">    static <span class="keyword">dispatch_once_t </span>onceToken<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_once(&amp;onceToken, </span>^&#123;</div><div class="line"></div><div class="line">        NSBundle *<span class="keyword">bundle </span>= [NSBundle mainBundle]<span class="comment">;</span></div><div class="line">        </div><div class="line">        <span class="keyword">bundleID </span>= [<span class="keyword">bundle </span><span class="keyword">bundleIdentifier];</span></div><div class="line">        </div><div class="line">        NSString *lastStr = [[<span class="keyword">bundleID </span>componentsSeparatedByString:@<span class="string">"."</span>] lastObject]<span class="comment">;</span></div><div class="line">        if ([lastStr stringByReplacingOccurrencesOfString:@<span class="string">"*"</span> withString:@<span class="string">""</span>].length == <span class="number">0</span>) &#123;</div><div class="line">            </div><div class="line">            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary]<span class="comment">;</span></div><div class="line">            NSString *appName = [infoDictionary objectForKey:@<span class="string">"CFBundleDisplayName"</span>]<span class="comment">;</span></div><div class="line">            if(appName.length &lt;= <span class="number">0</span>)</div><div class="line">                appName = @<span class="string">"software"</span><span class="comment">;</span></div><div class="line">            </div><div class="line">            NSString *appNameFullSpell = [appName pinyinWithoutBlank]<span class="comment">;</span></div><div class="line">            </div><div class="line">            <span class="keyword">bundleID </span>= [<span class="keyword">bundleID </span>stringByAppendingFormat:@<span class="string">"_%@"</span>, appNameFullSpell]<span class="comment">;</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;)<span class="comment">; //&lt;---- dispatch_once END ----&gt;//</span></div><div class="line">    </div><div class="line">    </div><div class="line">    return <span class="keyword">bundleID;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  uuidForDevice PERSISTS for: System reboot、System upgrade、System reset。</div><div class="line"> *  @attention  System reset (persists only if the user restores a device backup which includes also keychain's data)</div><div class="line"> *</div><div class="line"> *  @return uuidForDevice</div><div class="line"> */</div><div class="line">+ (<span class="built_in">NSString</span> *_Nonnull)uuidForDevice</div><div class="line">&#123;</div><div class="line">    DDLogInfo(<span class="string">@"%@,%@"</span>, THIS_FILE,THIS_METHOD);</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="keyword">static</span> <span class="built_in">NSMutableString</span> *uuidForDeviceAsIs = <span class="literal">nil</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line">    </div><div class="line">        <span class="comment">//! 形如 @"C3A53BB7-8F1A-4372-A37E-1F12FCA77A3D"</span></div><div class="line">        <span class="built_in">NSString</span> *uuidForVendor = [[[<span class="built_in">UIDevice</span> currentDevice] identifierForVendor] UUIDString];</div><div class="line">        DDLogInfo(<span class="string">@"%@,%@"</span>, <span class="string">@"uuidForVendor"</span>,uuidForVendor);</div><div class="line">        </div><div class="line">        <span class="comment">/**</span></div><div class="line">         但是，uuidForVendor 用作 设备唯一ID，不够准确，所以使用开源库，[FCUUID uuidForDevice];</div><div class="line">         形如  @"59af2b707b60455f8ed88d1414c233ea"</div><div class="line">         1、这个开源库，变成“小写”了，所以要先还原"大写"</div><div class="line">         2、这个开源库，把"-"删除了，所以要先还原"-"</div><div class="line">         */</div><div class="line">        <span class="comment">//! Ref.:  https://github.com/fabiocaccamo/FCUUID</span></div><div class="line">        <span class="built_in">NSString</span> *uuidForDevice = [FCUUID uuidForDevice];</div><div class="line">        DDLogInfo(<span class="string">@"%@,%@"</span>, <span class="string">@"uuidForDevice"</span>,uuidForDevice);</div><div class="line">        </div><div class="line">        <span class="comment">//! 分隔符 ‘-’</span></div><div class="line">        <span class="built_in">NSString</span> * <span class="keyword">const</span> separatorStr = <span class="string">@"-"</span>;</div><div class="line">        </div><div class="line">        <span class="comment">// 找到"-"的位置</span></div><div class="line">        <span class="built_in">NSMutableArray</span>&lt;<span class="built_in">NSValue</span> *&gt;  *rangeMArr = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">        <span class="built_in">NSRange</span> range = [uuidForVendor rangeOfString:separatorStr options:<span class="built_in">NSLiteralSearch</span> range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, uuidForVendor.length)];</div><div class="line">        <span class="keyword">while</span> (range.location != <span class="built_in">NSNotFound</span>) &#123;</div><div class="line">            [rangeMArr addObject:[<span class="built_in">NSValue</span> valueWithRange:range]];</div><div class="line">            range = [uuidForVendor rangeOfString:separatorStr</div><div class="line">                                         options:<span class="built_in">NSLiteralSearch</span></div><div class="line">                                           range:<span class="built_in">NSMakeRange</span>(range.location+range.length,</div><div class="line">                                                             uuidForVendor.length-range.location-range.length)</div><div class="line">                     ];</div><div class="line">        &#125;</div><div class="line">        DDLogInfo(<span class="string">@"%@,%@,%@"</span>, <span class="string">@"range of "</span>, separatorStr, rangeMArr);</div><div class="line">        </div><div class="line">        <span class="comment">// 1、这个开源库，变成“小写”了，所以要先还原"大写"</span></div><div class="line">        uuidForDeviceAsIs = [[uuidForDevice uppercaseString] mutableCopy];</div><div class="line">        </div><div class="line">        <span class="comment">/**</span></div><div class="line">         2、这个开源库，把"-"删除了，所以要先还原"-"</div><div class="line">         [FCUUID uuidForDevice]; 这个开源库，把"-"删除了，所以要先还原"-"</div><div class="line">         */</div><div class="line">        <span class="keyword">if</span> (uuidForVendor.length - rangeMArr.count == uuidForDevice.length) &#123;<span class="comment">//除去'-'，uuidForVendor 和 uuidForDevice 长度 相等</span></div><div class="line">            </div><div class="line">            [rangeMArr enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line">                <span class="built_in">NSValue</span> *rangeValue = obj;</div><div class="line">                <span class="built_in">NSRange</span> range = [rangeValue rangeValue];</div><div class="line">                </div><div class="line">                [uuidForDeviceAsIs insertString:separatorStr atIndex:range.location];</div><div class="line">            &#125;];</div><div class="line">            </div><div class="line">            DDLogInfo(<span class="string">@"%@,%@"</span>, <span class="string">@"uuidForDeviceAsIs"</span>,uuidForDeviceAsIs);</div><div class="line">            </div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            </div><div class="line">            DDLogError(<span class="string">@"%@,%@"</span>, <span class="string">@"uuidForDevice 错误！"</span>,<span class="string">@"除去'-'，uuidForVendor 和 uuidForDevice 长度 不 相等，直接使用 uuidForDevice"</span>);</div><div class="line">            </div><div class="line">            DDLogInfo(<span class="string">@"%@,%@"</span>, <span class="string">@"uuidForDeviceAsIs"</span>, uuidForDeviceAsIs);</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">    &#125;); <span class="comment">//&lt;---- dispatch_once END ----&gt;//</span></div><div class="line">    </div><div class="line">    </div><div class="line">    DDLogInfo(<span class="string">@"%@,%@"</span>, <span class="string">@"uuidForDeviceAsIs"</span>, uuidForDeviceAsIs);</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> uuidForDeviceAsIs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="advertisingIdentifier"><a href="#advertisingIdentifier" class="headerlink" title="advertisingIdentifier"></a>advertisingIdentifier</h4><h5 id="第一部分：问题描述"><a href="#第一部分：问题描述" class="headerlink" title="第一部分：问题描述"></a>第一部分：问题描述</h5><p>概述：使用广告id（即 idfa），但是app内没有出现广告，导致 AppStore审核  被拒绝。</p>
+<p>详述：</p>
+<p>PLA 3.3.12 详情 </p>
+<p>我们发现，您的 app 使用 iOS 广告 ID，但并未包含广告功能。根据 App Store 审核准则 的规定，这种行为不符合 iOS Developer Program 许可协议。 </p>
+<p>具体而言，iOS Developer Program 许可协议的第 3.3.12 部分规定： </p>
+<p>“您和您的应用软件（以及与您签订广告投放合同的任意第三方）可以使用广告 ID，并且通过广告 ID 获取的任何信息只能用于广告投放用途。如果用户重置广告 ID，那么您必须同意不通过直接或间接的方式将先前的广告 ID 及其任何相关信息与重置的广告 ID 进行组合、联合、链接或以其他方式关联起来。” </p>
+<p>注：iAd 不使用 AdSupport 框架、ASIdentifierManager 或广告 ID。因此，无需为 iAd 实施这些功能，也不得出于 iAd 支持目的在您的 app 中添加这些功能。 </p>
+<p>如果您的 app 正在投放广告，请： </p>
+<ul>
+<li><p>确保您已在设备（而不只是模拟器）上测试您的 app，并确保您在测试前已移除您 app 的所有旧版本 </p>
+</li>
+<li><p>告知我们如何才能在您的 app 中找到广告 </p>
+</li>
+</ul>
+<p>如果您的 app 没有投放广告，请检查您的代码（包括所有第三方库），以移除以下对象的所有实例： </p>
+<p>类: ASIdentifierManager<br>选择器: advertisingIdentifier<br>框架: AdSupport.framework </p>
+<p>如果您计划在未来版本中加入广告，那么在您加入广告功能之前，请从您的 app 中移除广告 ID。 </p>
+<p>若要查找广告 ID，请使用“nm”工具。有关“nm”工具的信息，请参阅 nm 手册页 。 </p>
+<p>如果您没有库源的访问权限，则可以使用“strings”或“otool”命令行工具搜索编译的二进制文件。“strings”工具列出了库调用的方法，且“otool -ov”列出了 Objective-C 类结构及其定义的方法。这些技术可以帮助您缩小存在问题的代码的查找范围。</p>
+<h5 id="第二部分：问题场景"><a href="#第二部分：问题场景" class="headerlink" title="第二部分：问题场景"></a>第二部分：问题场景</h5><p>当时场景：</p>
+<ol>
+<li>libWeiboSDK.a    使用到了 advertisingIdentifier（即 广告id）<br>libWoPushSDK.a  使用到了 advertisingIdentifier（即 广告id）</li>
+</ol>
+<p>备注：<br>如何找出使用了 idfa 的 .a 文件 ？<br>App store 审核上传Advertising Identifier查找和IDFA<br><a href="http://blog.csdn.net/folish_audi/article/details/33696609" target="_blank" rel="external">http://blog.csdn.net/folish_audi/article/details/33696609</a><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_1.jpg" alt=""></p>
+<p>提交之前选项：此App是否使用广告标示符（IDFA）？ －－－－ 选择了“否”。导致无法提交，如图：<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_2.jpg" alt=""></p>
+<ol>
+<li>所以，此App是否使用广告标示符（IDFA）？ －－－－ 选择了“是”。可以提交，进行审核。<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_3.jpg" alt=""></li>
+</ol>
+<p>加一个AD广告的SDK到工程，但是不使用。<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_4.jpg" alt=""></p>
+<p>然后提交时 选择在app内投放广告<br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_5.jpg" alt=""></p>
+<p>同时选择   “本人确认在此确认”</p>
+<p><strong>但是，这么做，AppStore审核  被拒绝了。</strong><br><strong>但是，这么做，AppStore审核  被拒绝了。</strong><br><strong>但是，这么做，AppStore审核  被拒绝了。</strong></p>
+<p>详见：<br>第一部分：问题描述<br>概述：使用广告id（即 idfa），但是app内没有出现广告，导致 AppStore审核  被拒绝。</p>
+<h5 id="第三部分：问题解决"><a href="#第三部分：问题解决" class="headerlink" title="第三部分：问题解决"></a>第三部分：问题解决</h5><p>关于手机的序列号，UDID，IMEI，IMSI，ICCID详解<br><a href="http://ju.outofmemory.cn/entry/64228" target="_blank" rel="external">http://ju.outofmemory.cn/entry/64228</a></p>
+<p>iOS唯一标示<br><a href="http://milker90.blog.163.com/blog/static/229430038201441643813286/" target="_blank" rel="external">http://milker90.blog.163.com/blog/static/229430038201441643813286/</a></p>
+<p>核心信息：</p>
+<p>idfa</p>
+<p>全名：advertisingIdentifier<br>代码：<br>  NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];</p>
+<p>来源：iOS6.0及以后<br>说明：直译就是广告id， 在同一个设备上的所有App都会取到相同的值，是苹果专门给各广告提供商用来追踪用户而设的，用户可以在 设置|隐私|广告追踪 里重置此id的值，或限制此id的使用，故此id有可能会取不到值，但好在Apple默认是允许追踪的，而且一般用户都不知道有这么个设置，所以基本上用来监测推广效果，是戳戳有余了。<br>注意：由于idfa会出现取不到的情况，故绝不可以作为业务分析的主id，来识别用户。</p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_6.jpg" alt=""><br><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_7.jpg" alt=""></p>
+<h4 id="identifierForVendor"><a href="#identifierForVendor" class="headerlink" title="identifierForVendor"></a>identifierForVendor</h4><p>idfv</p>
+<p>全名：identifierForVendor<br>代码：<br>  NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];<br>来源：iOS6.0及以后<br>说明：顾名思义，是给Vendor标识用户用的，每个设备在所属同一个Vender的应用里，都有相同的值。其中的Vender是指应用提供商，但准确点说，是通过BundleID的反转的前两部分进行匹配，如果相同就是同一个Vender，例如对于com.taobao.app1, com.taobao.app2 这两个BundleID来说，就属于同一个Vender，共享同一个idfv的值。和idfa不同的是，idfv的值是一定能取到的，所以非常适合于作为内部用户行为分析的主id，来标识用户，替代OpenUDID。<br>注意：如果用户将属于此Vender的所有App卸载，则idfv的值会被重置，即再重装此Vender的App，idfv的值和之前不同。</p>
+<p>解决办法：</p>
+<ol>
+<li>对于 微博SDK（即 libWeiboSDK.a）, 尝试从 新浪微博开放平台 找“不包含idfa的SDK”，但是没有找到。</li>
+<li>对于 沃推SDK（即 libWoPushSDK.a），协调 亚信（写 沃推SDK的公司），把 idfa 换成 idfv。</li>
+</ol>
+<p>去掉，微博分享的功能，<br>删除 对 微博SDK 在项目中的引用。</p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_8.jpg" alt=""></p>
+<p>然后，在提交审核的时候，此App是否使用广告标示符（IDFA）？ －－－－ 选择了“否”。可以提交，进行审核。</p>
+<p>并发起 “加急审核”。</p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_9.jpg" alt=""></p>
+<p>半天之后（加急审核，速度真快），审核通过，如图：</p>
+<p>其中，加急审核的核心理由是：奔溃，数据错乱。</p>
+<p>然后选择，手动上架，一个小时之后，就可以在AppStore下载 最新版本了。</p>
+<p><img src="http://7xpc28.com1.z0.glb.clouddn.com/iOS-UDID-UUID-advertisingIdentifier-identifierForVendor_10.jpg" alt=""></p>
+<h5 id="第四部分：其他尝试"><a href="#第四部分：其他尝试" class="headerlink" title="第四部分：其他尝试"></a>第四部分：其他尝试</h5><p>根据前面 三个部分，进行第四个部分的“其他尝试”－－－ </p>
+<p>6.0.3.8 这个版本，被AppStore拒绝了。</p>
+<p>换过了 WoPush的SDK，使之 不包含 广告id，即 idfa。<br>但是，新浪微博的SDK，没有找到 不包含 广告id  的SDK。</p>
+<p>为了避免：</p>
+<p>（1）实际上    “使用到了  广告id”，在提交审核的时候，<br>        但是勾选  “没有使用 广告id”，导致 无法 提交审核。</p>
+<p>（2）勾选        “使用到了  广告id”，Apple真正来审核了，<br>        软件中  “并没有出现广告”，   导致 审核  被拒绝。</p>
+<p>所以，现在有三种选择：</p>
+<ol>
+<li>微博分享，这个功能，先去掉。删除 微博的SDK。</li>
+<li>微博分享，换成 使用 友盟分享，来实现。</li>
+<li>加入广告功能。</li>
+</ol>
+<p>其中：</p>
+<ol>
+<li>工作量最小，风险最小，能最快地再次提交审核。</li>
+<li>工作量稍大，需要时间。</li>
+<li>工作量最大，风险最大。</li>
+</ol>
+<p>但是：<br>选择3    是  不可避免的，因为以后要做 “使用广告id 自动登录”。</p>
+<p>我的建议是，目前选1.<br>等待 AppStore审核  通过之后，选择3.   －－－－－  也可以尝试，使用 identifierForVendor 代替 advertisingIdentifier，那么 3 就不需要做。</p>
+<h5 id="第五部分：最终方案"><a href="#第五部分：最终方案" class="headerlink" title="第五部分：最终方案"></a>第五部分：最终方案</h5><p>考虑到：在用户删除所有 该开发商的app之后，identifierForVendor 会改变。<br>那么：使用 keyChain，更合适。</p>
+<p>这部分由ZhangJianMin 实现的。请看 沃邮箱项目中的文件：DeviceIdUtils.h 和 DeviceIdUtils.m<br>/*<br> iOS的keyChain是一个相对独立的空间，当程序替换，删除时并不会删除keyChain的内容。<br> 刷机，恢复出厂应该就没有了。</p>
+<p> 一键注册，暂时使用keyChain中保存的设备id<br> keyChain中保存的设备id值是首次安装沃邮箱时产生的供应商id<br> */</p>
+<p>后来，我在GitHub上找了一个，实现原理相同，但是更好的 <a href="https://github.com/fabiocaccamo/FCUUID" target="_blank" rel="external">FCUUID</a></p>
+<h4 id="KeyChain。"><a href="#KeyChain。" class="headerlink" title="KeyChain。"></a>KeyChain。</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 钥匙串</span></div><div class="line">    <span class="attribute">pod</span> <span class="string">'UICKeyChainStore'</span></div><div class="line">    pod <span class="string">'SSKeychain'</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/30/21_data-structure-algorithm-practices/" rel="next" title="数据结构、常用算法">
+                <i class="fa fa-chevron-left"></i> 数据结构、常用算法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/10/20_CocoaPods-skill-and-iOS-library/" rel="prev" title="CocoaPods技巧 和 iOS库">
+                CocoaPods技巧 和 iOS库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#设备唯一-id"><span class="nav-number">1.</span> <span class="nav-text">设备唯一 id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDID"><span class="nav-number">2.</span> <span class="nav-text">UDID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#advertisingIdentifier"><span class="nav-number">3.</span> <span class="nav-text">advertisingIdentifier</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一部分：问题描述"><span class="nav-number">3.1.</span> <span class="nav-text">第一部分：问题描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二部分：问题场景"><span class="nav-number">3.2.</span> <span class="nav-text">第二部分：问题场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三部分：问题解决"><span class="nav-number">3.3.</span> <span class="nav-text">第三部分：问题解决</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#identifierForVendor"><span class="nav-number">4.</span> <span class="nav-text">identifierForVendor</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第四部分：其他尝试"><span class="nav-number">4.1.</span> <span class="nav-text">第四部分：其他尝试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第五部分：最终方案"><span class="nav-number">4.2.</span> <span class="nav-text">第五部分：最终方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KeyChain。"><span class="nav-number">5.</span> <span class="nav-text">KeyChain。</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/02/02/19_iOS-UDID-UUID-advertisingIdentifier-identifierForVendor/';
+      var disqus_title = "iOS唯一ID：UDID，UUID，advertisingIdentifier，identifierForVendor，KeyChain。";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/02/02/19_iOS-UDID-UUID-advertisingIdentifier-identifierForVendor/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

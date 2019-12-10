@@ -1,0 +1,830 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处 https://HawkingOuYang.github.io/
+我的GitHub
+
+项目工程目录待整理
+Modules：存放功能模块。将程序划分为多个功能模块，每个模块基于MVC/MVVM组织代码
+Library：存放三方库
+Util：存放自己封装的工具类
+Catergory：存放扩展类
+Custom：存放自定义的其他类
+MacroAndConstant：存放宏定义和常量的文件
+Bas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS团队代码规范（OC版）">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/09/10/7_ObjC-code-style-as-team/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处 https://HawkingOuYang.github.io/
+我的GitHub
+
+项目工程目录待整理
+Modules：存放功能模块。将程序划分为多个功能模块，每个模块基于MVC/MVVM组织代码
+Library：存放三方库
+Util：存放自己封装的工具类
+Catergory：存放扩展类
+Custom：存放自定义的其他类
+MacroAndConstant：存放宏定义和常量的文件
+Bas">
+<meta property="og:updated_time" content="2019-01-17T03:35:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS团队代码规范（OC版）">
+<meta name="twitter:description" content="文章出处 https://HawkingOuYang.github.io/
+我的GitHub
+
+项目工程目录待整理
+Modules：存放功能模块。将程序划分为多个功能模块，每个模块基于MVC/MVVM组织代码
+Library：存放三方库
+Util：存放自己封装的工具类
+Catergory：存放扩展类
+Custom：存放自定义的其他类
+MacroAndConstant：存放宏定义和常量的文件
+Bas">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/09/10/7_ObjC-code-style-as-team/">
+
+  <title> iOS团队代码规范（OC版） | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS团队代码规范（OC版）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T00:00:00+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/10/7_ObjC-code-style-as-team/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/10/7_ObjC-code-style-as-team/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<h2 id="项目工程目录"><a href="#项目工程目录" class="headerlink" title="项目工程目录"></a>项目工程目录</h2><p>待整理</p>
+<p>Modules：存放功能模块。将程序划分为多个功能模块，每个模块基于MVC/MVVM组织代码</p>
+<p>Library：存放三方库</p>
+<p>Util：存放自己封装的工具类</p>
+<p>Catergory：存放扩展类</p>
+<p>Custom：存放自定义的其他类</p>
+<p>MacroAndConstant：存放宏定义和常量的文件</p>
+<p>BaseViewController：基类，单独提出来</p>
+<p>SupportingFile：存放项目配置文件</p>
+<p>Resource：存放资源，按照图片，音频，视频不同分类存放</p>
+<p>Request：封装的网络请求类</p>
+<h2 id="总体命名规范（遵循苹果官方规范）"><a href="#总体命名规范（遵循苹果官方规范）" class="headerlink" title="总体命名规范（遵循苹果官方规范）"></a>总体命名规范（遵循苹果官方规范）</h2><p>小驼峰命名法(CamelCase):第一个单词小写字母开头，其他单词首字母大写；</p>
+<p>大驼峰命名法(PascalCase):所有首字母大写。</p>
+<p>1、类名、协议名：遵循大驼峰命名法；</p>
+<p>2、常量：这里的常量指的是宏(#define)、枚举(enum)、常量(const)等，名称遵循大驼峰命名法；</p>
+<p>3、方法</p>
+<p>方法名和方法参数遵循相同的规则，使用小写开头的小驼峰法；</p>
+<p>方法名和参数尽量读起来像是一句话；</p>
+<p>方法名不允许使用“get“前缀；</p>
+<p>如果方法是为了获取对象的一个属性值，直接用属性名称来命名方法，不要添加 get 或其他的动词：</p>
+<p>不要使用 do 或 does 作为名字的一部分，动词本身的暗示就足够了；</p>
+<p>-或+与返回类型间留一个空格，但参数列表之间不要留间隔；</p>
+<p>如果参数过多，推荐每个参数各占一行；</p>
+<p>如果方法名以一个众所周知的大写缩略词开始，该规则不适用；</p>
+<p>避免使用下划线作为前缀，苹果公司保留这种使用，由第三方使用可能会导致命名冲突;</p>
+<p>4、变量：</p>
+<p>类成员变量，属性，局部变量，使用小写开头的小驼峰法，其中类成员变量在名称最前面加一个下划线，比如:myLovalVariable, _myInstanceVariable；变量名的名称尽量可以推测其用途，具有描述性。</p>
+<p>5、方法的参数命名：</p>
+<p>不要再方法名中使用类似 pointer,ptr这样的字眼去表示指针，参数本身的类型足以说明；</p>
+<p>不要使用简写，拼出完整的单词；</p>
+<p>6、前缀</p>
+<p>前缀是编程接口命名的重要部分，它们区分了软件的不同功能区域：</p>
+<p>前缀可以防止第三方开发者与Apple的命名冲突；</p>
+<p>同样可以防止Apple内部的命名冲突；</p>
+<p>前缀有指定格式：</p>
+<p>它由二到三个大写字母组成，不使用下划线和子前缀，</p>
+<p>命名类、协议、常量和typedef结构体时使用前缀。</p>
+<p>方法名不使用前缀（因为它存在于特定类的命名空间中），私有方法可以加前缀，比如private_XXX。</p>
+<p>结构体字段不使用前缀。</p>
+<h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><p>应该使用US英语.</p>
+<p>应该:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIColor</span> *myColor = [<span class="built_in">UIColor</span> whiteColor];</div></pre></td></tr></table></figure></p>
+<p>不应该:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIColor</span> *myColour = [<span class="built_in">UIColor</span> whiteColor];</div></pre></td></tr></table></figure></p>
+<h2 id="代码注释"><a href="#代码注释" class="headerlink" title="代码注释"></a>代码注释</h2><p>方法、函数、类、协议、类别的定义都需要注释，推荐采用Apple的标准注释风格，好处是可以在引用的地方alt+点击自动弹出注释，非常方便。</p>
+<p>有很多可以自动生成注释格式的插件，推荐使用VVDocumenter。</p>
+<h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><p>声明一个孤立的class或protocol</p>
+<p>将声明放入单独的文件</p>
+<p>使头文件名与声明的class/protocol相同</p>
+<p>声明关联的class或protocol</p>
+<p>将关联的声明（class/category/protocol）放入同一个头文件</p>
+<p>头文件名与主要的class/category/protocol相同</p>
+<h2 id="Framework头文件"><a href="#Framework头文件" class="headerlink" title="Framework头文件"></a>Framework头文件</h2><p>每个framework都应该有一个同名头文件</p>
+<p>Include了框架内其他所有头文件</p>
+<h2 id="声明属性和实例变量"><a href="#声明属性和实例变量" class="headerlink" title="声明属性和实例变量"></a>声明属性和实例变量</h2><p>如果property表⽰示为⼀个名词或动词,格式如下@property (…) 类型 名词/动词 ;<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">property</span><span class="title"> </span>(strong) NSString *title; </div><div class="line"></div><div class="line">@<span class="keyword">property</span><span class="title"> </span>(assign) BOOL showsAlpha;</div></pre></td></tr></table></figure></p>
+<p>如果property表⽰示为一个形容词 可省略 ”is” 前缀，但要指定getter⽅方法的惯⽤用名称<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">getter</span>=isEditable) <span class="built_in">BOOL</span> editable;</div></pre></td></tr></table></figure></p>
+<h2 id="实例变量"><a href="#实例变量" class="headerlink" title="实例变量"></a>实例变量</h2><p>通常不应该直接访问实例变量 init、dealloc、accessor methods等⽅方法内部例外 实例变量以下划线 “_” 开始 确保实例变量描述了所存储的属性<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MyClass</span> </span>&#123; </div><div class="line">   <span class="built_in">BOOL</span> _showsTitle;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果想要修改property的实例变量名,使用 @synthesize语句<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@implementation</span> MyClass </div><div class="line"></div><div class="line"><span class="variable">@synthesize</span> showsTitle=_showsTitle;</div></pre></td></tr></table></figure></p>
+<p>为一个class添加实例变量时,有几点需要注意: </p>
+<p>避免声明公有实例变量 开发者关注的应该是对象接口,⽽不是其数据细节 你可以通过使用property来避免声明实例变量 如果需要声明实例变量,指定关键字@private 或 @protected 如果你希望⼦子类可以直接访问某个实例变量,使⽤用 @protected 关键字 如果⼀个实例变量是某个类可访问的属性,确保写了accessor methods 如果有可能,还是使用property </p>
+<h2 id="可变对象"><a href="#可变对象" class="headerlink" title="可变对象"></a>可变对象</h2><p>你应该同时避免暴露在公开的接口中可变的对象，因为这允许你的类的使用者改变类自己的内部表示并且破坏类的封装。你可以提供可以只读的属性来返回你对象的不可变的副本。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* .h */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span> *elements</div><div class="line"></div><div class="line"><span class="comment">/* .m */</span></div><div class="line">- (<span class="built_in">NSArray</span> *)elements &#123;</div><div class="line"><span class="keyword">return</span> [<span class="keyword">self</span>.mutableElements <span class="keyword">copy</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##常量 </p>
+<h3 id="Integer常量使⽤枚举"><a href="#Integer常量使⽤枚举" class="headerlink" title="Integer常量使⽤枚举"></a>Integer常量使⽤枚举</h3><p>使⽤枚举来关联一组integer常量 枚举常量和typedef遵循函数的命名规范,下⾯面的例⼦子是 NSMatrix.h<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef <span class="class"><span class="keyword">enum</span> <span class="title">_NSMatrixMode</span> &#123; </span></div><div class="line">	NSRadioModeMatrix = <span class="number">0</span>,</div><div class="line">	NSHighlightModeMatrix = <span class="number">1</span>,</div><div class="line">	NSListModeMatrix = <span class="number">2</span>, </div><div class="line">	NSTrackModeMatrix = <span class="number">3</span> </div><div class="line">&#125; NSMatrixMode;</div></pre></td></tr></table></figure></p>
+<p>Typedef 标记(在上述⽰示例中的 _NSMatrixMode)不是必要的。你可以为bit masks之类的东西创建⼀个匿名枚举<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> &#123;</span></div><div class="line">	NSBorderlessWindowMask = <span class="number">0</span>,</div><div class="line">	NSTitledWindowMask = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">	NSClosableWindowMask = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</div><div class="line">	NSMiniaturizableWindowMask = <span class="number">1</span> &lt;&lt; <span class="number">2</span>, </div><div class="line">	NSResizableWindowMask = <span class="number">1</span> &lt;&lt; <span class="number">3</span>, --&gt;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>当使用enum时，推荐使用新的固定基本类型规格，因为它有更强的类型检查和代码补全。现在SDK有一个宏NS_ENUM()来帮助和鼓励你使用固定的基本类型。<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef <span class="type">NS_ENUM</span>(<span class="type">NSInteger</span>, <span class="type">RWTLeftMenuTopItemType</span>) &#123;  </div><div class="line">    <span class="type">RWTLeftMenuTopItemMain</span>,  </div><div class="line">    <span class="type">RWTLeftMenuTopItemShows</span>,  </div><div class="line">    <span class="type">RWTLeftMenuTopItemSchedule</span>  </div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="float常量使用const修饰符"><a href="#float常量使用const修饰符" class="headerlink" title="float常量使用const修饰符"></a>float常量使用const修饰符</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">float</span> <span class="built_in">NSLightGray</span>;</div></pre></td></tr></table></figure>
+<h3 id="其他类型的常量"><a href="#其他类型的常量" class="headerlink" title="其他类型的常量"></a>其他类型的常量</h3><p>通常不应使用 #define 预编译指令来创建常量；</p>
+<p>对#define预编译指令,⼤写所有字母；</p>
+<p>定义NSString常量来作为Notification和Key值，这样做可以有效防⽌止拼写错误。</p>
+<p>应该<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> RWTAboutViewControllerCompanyName = <span class="string">@"RayWenderlich.com"</span>;  </div><div class="line"><span class="keyword">static</span> <span class="built_in">CGFloat</span> <span class="keyword">const</span> RWTImageThumbnailHeight = <span class="number">50.0</span>;</div></pre></td></tr></table></figure></p>
+<p>不应该<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> CompanyName @<span class="meta-string">"RayWenderlich.com"</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> thumbnailHeight 2</span></div></pre></td></tr></table></figure></p>
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p>Notification的格式 类/头⽂文件名+进⾏行状态+通知名称+Notification<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">[Name of associated class]</span> + <span class="string">[Did | Will]</span> + <span class="string">[UniquePartOfName]</span> + Notification</div></pre></td></tr></table></figure></p>
+<p>如:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSApplicationDidBecomeActiveNotification</span> </div><div class="line"><span class="built_in">NSWindowDidMiniaturizeNotification</span></div><div class="line"><span class="built_in">NSTextViewDidChangeSelectionNotification</span> </div><div class="line"><span class="built_in">NSColorPanelColorDidChangeNotification</span></div></pre></td></tr></table></figure></p>
+<h3 id="方法大括号和其他大括号-if-else-switch-while-等-总是在同⼀行语句打开但在新⾏中关闭。"><a href="#方法大括号和其他大括号-if-else-switch-while-等-总是在同⼀行语句打开但在新⾏中关闭。" class="headerlink" title="方法大括号和其他大括号(if/else/switch/while 等.)总是在同⼀行语句打开但在新⾏中关闭。"></a>方法大括号和其他大括号(if/else/switch/while 等.)总是在同⼀行语句打开但在新⾏中关闭。</h3><p>应该<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (user.isHappy) &#123;</div><div class="line">    //<span class="keyword">Do</span> something</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    //<span class="keyword">Do</span> something <span class="keyword">else</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#如果⼀个方法有特别多的参数或者名称很长,应该将其按照 : 来对齐分行显⽰<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-<span class="params">(id)</span>initWithModel:<span class="params">(IPCModle)</span>model</div><div class="line">     resolution   :<span class="params">(IPCResolution)</span>resolution</div><div class="line">     authName     :<span class="params">(NSString *)</span>authName</div><div class="line">     password     :<span class="params">(NSString *)</span>password</div></pre></td></tr></table></figure></p>
+<h3 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h3><p>不要使用下划线作为私有方法的前缀，Apple保留这一使用方式。</p>
+<p>因为若是你的私有方法名已被Apple使用，覆盖它将会产生极难追踪的BUG。</p>
+<p>如果继承自大型Cocoa框架（如UIView），请确保子类的私有方法名与父类不一样。</p>
+<p>可以为私有方法加一个前缀，如公司名或项目名：XX_，</p>
+<p>例如你的项目叫做Byte Flogger，那么前缀可能是：BF_addObject。</p>
+<p>总之，为子类的私有方法添加前缀是为了不覆盖其父类的私有方法</p>
+<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><p>如果构造代码写在⼀行,需要在括号两端留有⼀个空格,使得被构造的元素于与构造语法区分开来: </p>
+<p>// 正确,在语法糖的 “[]” 或者 “{}” 两端留有空格<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *array = @[ [foo description], <span class="string">@"Another String"</span>, [bar description] ]; <span class="built_in">NSDictionary</span> *dict = @&#123; <span class="built_in">NSForegroundColorAttributeName</span> : [<span class="built_in">NSColor</span> redColor] &#125;;</div></pre></td></tr></table></figure></p>
+<p>// 不正确，不留有空格降低了可读性<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSArray*<span class="built_in"> array </span>= @[[foo description], [bar description]];</div><div class="line">NSDictionary* dict = @&#123;NSForegroundColorAttributeName: [NSColor redColor]&#125;;</div></pre></td></tr></table></figure></p>
+<p>如果构造代码不写在⼀行内,构造元素需要使⽤四个空格来进行缩进,右括号 ] 或者 } 写在新的⼀行,并且与调⽤语法糖那⾏代码的第一个非空字符对齐:<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSArray *<span class="keyword">array</span> = @[ </div><div class="line">    @<span class="string">"This"</span>,</div><div class="line">    @<span class="string">"is"</span>,</div><div class="line">    @<span class="string">"an"</span>, </div><div class="line">    @<span class="string">"array"</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSDictionary *dictionary = @&#123;</div><div class="line">    <span class="string">NSFontAttributeName :</span> [NSFont <span class="string">fontWithName:</span>@<span class="string">"Helvetica-Bold"</span> <span class="string">size:</span><span class="number">12</span>], </div><div class="line">    <span class="string">NSForegroundColorAttributeName :</span> fontColor </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>构造字典时,字典的 Key 和 Value 与中间的冒号 : 都要留有一个空格。</p>
+<h2 id="代码组织和分类"><a href="#代码组织和分类" class="headerlink" title="代码组织和分类"></a>代码组织和分类</h2><p>在函数分组和protocol/delegate实现中使用#pragma mark - 来分类方法,一般要遵循以下结构: </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - Lifecycle </div><div class="line"></div><div class="line">- (instancetype)init &#123;&#125; </div><div class="line"></div><div class="line">- (void)dealloc &#123;&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;&#125; </div><div class="line"></div><div class="line">- (void)viewWillAppear:(BOOL)animated &#123;&#125; </div><div class="line"></div><div class="line">- (void)didReceiveMemoryWarning &#123;&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - Custom Accessors</div><div class="line">- (void)setCustomProperty:(id)value &#123;&#125; </div><div class="line">- (id)customProperty &#123;&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - IBActions</div><div class="line">- (IBAction)submitData:(id)sender &#123;&#125; </div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - Public</div><div class="line">- (void)publicMethod &#123;&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - Private</div><div class="line">- (void)privateMethod &#123;&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - Protocol conformance </div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - UITextFieldDelegate </div><div class="line"></div><div class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - UITableViewDataSource</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/10/6_ObjC-JS-and-Native-WebView/" rel="next" title="ObjC与JS交互的Native+WebView开发">
+                <i class="fa fa-chevron-left"></i> ObjC与JS交互的Native+WebView开发
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/11/8_iOS-VideoChat-on-GitHub-and-more/" rel="prev" title="iOS视频通话在GitHub的资料">
+                iOS视频通话在GitHub的资料 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目工程目录"><span class="nav-number">1.</span> <span class="nav-text">项目工程目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总体命名规范（遵循苹果官方规范）"><span class="nav-number">2.</span> <span class="nav-text">总体命名规范（遵循苹果官方规范）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言"><span class="nav-number">3.</span> <span class="nav-text">语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码注释"><span class="nav-number">4.</span> <span class="nav-text">代码注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#头文件"><span class="nav-number">5.</span> <span class="nav-text">头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework头文件"><span class="nav-number">6.</span> <span class="nav-text">Framework头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明属性和实例变量"><span class="nav-number">7.</span> <span class="nav-text">声明属性和实例变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例变量"><span class="nav-number">8.</span> <span class="nav-text">实例变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变对象"><span class="nav-number">9.</span> <span class="nav-text">可变对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Integer常量使⽤枚举"><span class="nav-number">9.1.</span> <span class="nav-text">Integer常量使⽤枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#float常量使用const修饰符"><span class="nav-number">9.2.</span> <span class="nav-text">float常量使用const修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他类型的常量"><span class="nav-number">9.3.</span> <span class="nav-text">其他类型的常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通知"><span class="nav-number">9.4.</span> <span class="nav-text">通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法大括号和其他大括号-if-else-switch-while-等-总是在同⼀行语句打开但在新⾏中关闭。"><span class="nav-number">9.5.</span> <span class="nav-text">方法大括号和其他大括号(if/else/switch/while 等.)总是在同⼀行语句打开但在新⾏中关闭。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有方法"><span class="nav-number">9.6.</span> <span class="nav-text">私有方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法糖"><span class="nav-number">9.7.</span> <span class="nav-text">语法糖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码组织和分类"><span class="nav-number">10.</span> <span class="nav-text">代码组织和分类</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/09/10/7_ObjC-code-style-as-team/';
+      var disqus_title = "iOS团队代码规范（OC版）";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/09/10/7_ObjC-code-style-as-team/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>

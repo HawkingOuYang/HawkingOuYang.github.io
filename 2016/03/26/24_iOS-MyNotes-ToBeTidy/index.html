@@ -1,0 +1,844 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="HawkingOuYang, iOS developer, Tech. Memo">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tech. Memo" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/ico1.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+深拷贝、浅拷贝Deep copying an NSArrayhttp://stackoverflow.com/questions/647260/deep-copying-an-nsarray
+If you only need a one-level-deep copy, you can expl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS笔记(待整理)">
+<meta property="og:url" content="https://HawkingOuYang.github.io/2016/03/26/24_iOS-MyNotes-ToBeTidy/index.html">
+<meta property="og:site_name" content="Tech. Memo">
+<meta property="og:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+深拷贝、浅拷贝Deep copying an NSArrayhttp://stackoverflow.com/questions/647260/deep-copying-an-nsarray
+If you only need a one-level-deep copy, you can expl">
+<meta property="og:updated_time" content="2019-01-17T03:35:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS笔记(待整理)">
+<meta name="twitter:description" content="文章出处，原创于 https://HawkingOuYang.github.io/
+我的GitHub
+
+深拷贝、浅拷贝Deep copying an NSArrayhttp://stackoverflow.com/questions/647260/deep-copying-an-nsarray
+If you only need a one-level-deep copy, you can expl">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://HawkingOuYang.github.io/2016/03/26/24_iOS-MyNotes-ToBeTidy/">
+
+  <title> iOS笔记(待整理) | Tech. Memo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ba182830f261362f8368804c0b8a56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Tech. Memo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS笔记(待整理)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-26T00:00:00+08:00" content="2016-03-26">
+              2016-03-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/26/24_iOS-MyNotes-ToBeTidy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/26/24_iOS-MyNotes-ToBeTidy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章出处，原创于 <a href="https://HawkingOuYang.github.io/">https://HawkingOuYang.github.io/</a></p>
+<p><a href="https://github.com/HawkingOuYang/" target="_blank" rel="external">我的GitHub</a></p>
+<hr>
+<h4 id="深拷贝、浅拷贝"><a href="#深拷贝、浅拷贝" class="headerlink" title="深拷贝、浅拷贝"></a>深拷贝、浅拷贝</h4><p>Deep copying an NSArray<br><a href="http://stackoverflow.com/questions/647260/deep-copying-an-nsarray" target="_blank" rel="external">http://stackoverflow.com/questions/647260/deep-copying-an-nsarray</a></p>
+<p>If you only need a one-level-deep copy, you can explicitly call for one…<br>NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:oldArray copyItems:YES];</p>
+<p>If you need a true deep copy, such as when you have an array of arrays, you can archive and then unarchive the collection, provided the contents all conform to the NSCoding protocol. An example of this technique is shown in Listing 3.</p>
+<p>Listing 3 A true deep copy</p>
+<p>NSArray* trueDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:<br>                            [NSKeyedArchiver archivedDataWithRootObject:oldArray]];</p>
+<p> {//[begin] fix bug — A true deep copy<br>    /*<br>    <a href="http://stackoverflow.com/questions/647260/deep-copying-an-nsarray" target="_blank" rel="external">http://stackoverflow.com/questions/647260/deep-copying-an-nsarray</a></p>
+<pre><code>If you need a true deep copy, such as when you have an array of arrays, you can archive and then unarchive the collection, provided the contents all conform to the NSCoding protocol. An example of this technique is shown in Listing 3.
+
+Listing 3 A true deep copy
+
+NSArray* trueDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:
+                            [NSKeyedArchiver archivedDataWithRootObject:oldArray]];
+*/
+ONOXMLElement *deepCopyElement = [NSKeyedUnarchiver unarchiveObjectWithData:
+                            [NSKeyedArchiver archivedDataWithRootObject:element]];
+//TODO: ONOXMLElement实现了NSCoding协议，unarchiveObjectWithData时 为何崩溃？
+
+self.element = deepCopyElement;//strong reference
+</code></pre><p>}//[end] fix bug — A true deep copy</p>
+<p>TODO: 这里还需要一张图片 !!</p>
+<p>/<strong> 码字–开始 </strong>/<br>//from - immutable And mutable<br>            NSString        <em>str1 = @”str1”;<br>NSMutableString </em>mutableStr1 = [NSMutableString stringWithString:@”mutableStr1”];<br>            NSArray        <em>arr1 = [       NSArray arrayWithObjects:@”1”,@”2”,@”3”, nil];<br>NSMutableArray </em>mutableArr1 = [NSMutableArray arrayWithObjects:@”A”,@”B”,@”C”, nil];<br>//to - inmutable<br>NSString        <em>copyStr1 = [str1        copy];<br>NSString </em>mutableCopyStr1 = [str1 mutableCopy];<br>NSString        <em>copyMutableStr1 = [mutableStr1        copy];<br>NSString </em>mutablecopyMutableStr1 = [mutableStr1 mutableCopy];<br>//to - mutable<br>NSMutableString        <em>copyStr1ToM = [str1        copy];<br>NSMutableString </em>mutableCopyStr1ToM = [str1 mutableCopy];<br>NSMutableString       <em>copyMutableStr1ToM = [mutableStr1        copy];<br>NSMutableString </em>mutablecopyMutableStrToM = [mutableStr1 mutableCopy];</p>
+<p>//log<br>NSLog(@”copyStr1=%p,%@—-from—str1=%p,%@”,<br>        copyStr1,copyStr1,       str1,str1);<br>NSLog(@”mutableCopyStr1=%p,%@————from—str1=%p,%@”,<br>        mutableCopyStr1,mutableCopyStr1,        str1,str1);<br>NSLog(@”copyMutableStr1=%p,%@————from—mutableStr1=%p,%@”,<br>        copyMutableStr1,copyMutableStr1,        mutableStr1,mutableStr1);<br>NSLog(@”mutablecopyMutableStr1=%p,%@————–from—mutableStr1=%p,%@”,<br>        mutablecopyMutableStr1,mutablecopyMutableStr1,   mutableStr1,mutableStr1);<br>NSLog(@”copyStr1ToM=%p,%@———from—str1=%p,%@”,<br>        copyStr1ToM,copyStr1ToM,         str1,str1);<br>NSLog(@”mutableCopyStr1ToM=%p,%@—————from—str1=%p,%@”,<br>        mutableCopyStr1ToM,mutableCopyStr1ToM,        str1,str1);<br>NSLog(@”copyMutableStr1ToM=%p,%@—————from—mutableStr1=%p,%@”,<br>        copyMutableStr1ToM,copyMutableStr1ToM,        mutableStr1,mutableStr1);<br>NSLog(@”mutablecopyMutableStrToM=%p,%@———————from–mutableStr1=%p,%@”,<br>        mutablecopyMutableStrToM,mutablecopyMutableStrToM,       mutableStr1,mutableStr1);<br>/<strong> 码字–好累 </strong>/</p>
+<p>2014-11-27 14:02:20.437 TestCopy[466:6731] copyStr1=0x100001088,str1—-from—str1=0x100001088,str1<br>2014-11-27 14:02:20.439 TestCopy[466:6731] mutableCopyStr1=0x100206420,str1————from—str1=0x100001088,str1<br>2014-11-27 14:02:20.440 TestCopy[466:6731] copyMutableStr1=0x100206500,mutableStr1————from—mutableStr1=0x100204d80,mutableStr1<br>2014-11-27 14:02:20.440 TestCopy[466:6731] mutablecopyMutableStr1=0x100206520,mutableStr1————–from—mutableStr1=0x100204d80,mutableStr1<br>2014-11-27 14:02:20.441 TestCopy[466:6731] copyStr1ToM=0x100001088,str1———from—str1=0x100001088,str1<br>2014-11-27 14:02:20.441 TestCopy[466:6731] mutableCopyStr1ToM=0x100206580,str1—————from—str1=0x100001088,str1<br>2014-11-27 14:02:20.441 TestCopy[466:6731] copyMutableStr1ToM=0x1002065e0,mutableStr1—————from—mutableStr1=0x100204d80,mutableStr1<br>2014-11-27 14:02:20.441 TestCopy[466:6731] mutablecopyMutableStrToM=0x100206600,mutableStr1———————from–mutableStr1=0x100204d80,mutableStr1<br>Program ended with exit code: 0</p>
+<h4 id="app-修改hosts"><a href="#app-修改hosts" class="headerlink" title="app 修改hosts"></a>app 修改hosts</h4><p>#pragma mark - 同步联系人<br>/*<br> 因为：直接访问<code>测试地址</code>(即ip地址)不行；<br> 那么：需要<code>修改本地hosts</code>(即设置每个request实例的host)；<br> 这么做：</p>
+<p> #if defined( DEBUG )<br>    [request setValue:@”example.domain.com” forHTTPHeaderField:@”host”];//修改本地hosts</p>
+<p> #endif<br> 所以，这样，客户端<code>使用域名访问</code>。<br>*/</p>
+<p>//! 同步联系人，基于 WebDAV 协议</p>
+<p>#if defined( DEBUG )<br>static NSString <em> const kBaseURL_syncContact = @”<a href="http://255.255.255.100/" target="_blank" rel="external">http://255.255.255.100/</a>“;     //测试环境<br>static NSString </em> const kURL_syncContactInfo = @”sync/contact”;</p>
+<p>#else<br>static NSString <em> const kBaseURL_syncContact = @”<a href="http://example.domain.com/" target="_blank" rel="external">http://example.domain.com/</a>“;  //生产环境<br>static NSString </em> const kURL_syncContactInfo = @”sync/contact”;</p>
+<p>#endif</p>
+<p>#if defined( DEBUG )<br>    // TODO: test code<br>    [request setValue:@”example.domain.com” forHTTPHeaderField:@”host”];</p>
+<p>#endif</p>
+<h4 id="tableView-性能优化"><a href="#tableView-性能优化" class="headerlink" title="tableView 性能优化"></a>tableView 性能优化</h4><h5 id="Cell圆角"><a href="#Cell圆角" class="headerlink" title="Cell圆角"></a>Cell圆角</h5><p>方式一：layer 设置圆形，重绘</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">_headImageView.layer.shouldRasterize    = YES<span class="comment">;</span></div><div class="line">_headImageView.layer.rasterizationScale = [UIScreen mainScreen].scale<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>这个不太靠谱。</p>
+<p>方式二：圆形 layer，填充图片</p>
+<p><a href="http://stackoverflow.com/questions/10133109/fastest-way-to-do-shadows-on-ios" target="_blank" rel="external">Fastest way to do shadows on iOS?</a></p>
+<p><a href="http://stackoverflow.com/questions/4475127/performance-scrolling-and-retina-resolution-images-in-calayer" target="_blank" rel="external">Performance scrolling and retina resolution images in CALayer</a></p>
+<p><a href="https://github.com/bharath2020/UITableViewTricks" target="_blank" rel="external">bharath2020/UITableViewTricks 这个很好!</a></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//用CALayer实现圆角。</span></div><div class="line"><span class="comment">//! 头像，用CALayer实现圆角。</span></div><div class="line">- (<span class="built_in">CALayer</span> *)mHeadImgLayer</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (!_mHeadImgLayer) &#123;</div><div class="line">        _mHeadImgLayer = [<span class="built_in">CALayer</span> new];</div><div class="line"></div><div class="line">        _mHeadImgLayer.frame        = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, R(<span class="number">54.</span>f<span class="number">-14</span>), R(<span class="number">54.</span>f<span class="number">-14</span>));</div><div class="line">        _mHeadImgLayer.cornerRadius  = (R(<span class="number">54.</span>f<span class="number">-14</span>))  / <span class="number">2</span>;</div><div class="line">        _mHeadImgLayer.masksToBounds = <span class="literal">YES</span>;</div><div class="line"></div><div class="line">        _mHeadImgLayer.shouldRasterize    = <span class="literal">YES</span>;</div><div class="line">        _mHeadImgLayer.rasterizationScale = [<span class="built_in">UIScreen</span> mainScreen].scale;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> _mHeadImgLayer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)layoutSubviews</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">super</span> layoutSubviews];</div><div class="line"></div><div class="line"></div><div class="line">    _mHeadImgLayer.frame    = _headImgV.frame;</div><div class="line">    _mStrangerImgLayer.frame = _headImgV.frame;</div><div class="line">&#125;</div><div class="line"></div><div class="line">_headImgV.hidden = <span class="literal">YES</span>;</div><div class="line">[<span class="keyword">self</span>.contentView.layer addSublayer: [<span class="keyword">self</span> mHeadImgLayer]];</div><div class="line">[<span class="keyword">self</span>.contentView.layer addSublayer: [<span class="keyword">self</span> mStrangerImgLayer]];</div><div class="line"></div><div class="line">[<span class="built_in">CATransaction</span> begin];</div><div class="line">[<span class="built_in">CATransaction</span> setAnimationDuration:<span class="number">0</span>];</div><div class="line">_mHeadImgLayer.contents = (<span class="keyword">id</span>)aPlaceholderImage.CGImage;</div><div class="line">[<span class="built_in">CATransaction</span> commit];</div><div class="line"></div><div class="line">- (<span class="built_in">UIImageView</span> *)strangerHeadImgV</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (!_strangerHeadImgV) &#123;</div><div class="line">        _strangerHeadImgV = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, R(<span class="number">54.</span>f<span class="number">-14</span>), R(<span class="number">54.</span>f<span class="number">-14</span>))];</div><div class="line"></div><div class="line">        _strangerHeadImgV.contentMode = <span class="built_in">UIViewContentModeScaleAspectFill</span>;</div><div class="line"></div><div class="line"></div><div class="line">        _strangerHeadImgV.layer.masksToBounds           = <span class="literal">YES</span>;</div><div class="line">        _strangerHeadImgV.layer.cornerRadius                = (R(<span class="number">54.</span>f<span class="number">-14</span>))  / <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _strangerHeadImgV;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="cell搜索匹配高亮"><a href="#cell搜索匹配高亮" class="headerlink" title="cell搜索匹配高亮"></a>cell搜索匹配高亮</h5><h5 id="cell动态高度"><a href="#cell动态高度" class="headerlink" title="cell动态高度"></a>cell动态高度</h5><h5 id="cell动态内容"><a href="#cell动态内容" class="headerlink" title="cell动态内容"></a>cell动态内容</h5><h5 id="table批更新"><a href="#table批更新" class="headerlink" title="table批更新"></a>table批更新</h5><p>tableView batch update</p>
+<p><a href="http://stackoverflow.com/questions/7623771/how-to-detect-that-animation-has-ended-on-uitableview-beginupdates-endupdates" target="_blank" rel="external">How to detect that animation has ended on UITableView beginUpdates/endUpdates?  （这个 好呀）</a></p>
+<p><a href="https://techblog.badoo.com/blog/2015/10/08/batch-updates-for-uitableview-and-uicollectionview/" target="_blank" rel="external">Batch updates for UITableView and UICollectionView  （这个 好呀）</a></p>
+<p><a href="http://stackoverflow.com/questions/8174017/tableview-reloaddata-vs-beginupdates-endupdates" target="_blank" rel="external">TableView reloadData vs. beginUpdates &amp; endUpdates</a></p>
+<h4 id="layoutSubviews"><a href="#layoutSubviews" class="headerlink" title="layoutSubviews"></a>layoutSubviews</h4><p><a href="http://blog.logichigh.com/2011/03/16/when-does-layoutsubviews-get-called/" target="_blank" rel="external">When does layoutSubviews get called?</a></p>
+<p>It’s important to optimize any UIView layoutSubviews method you create, as it can be frequently called, and has the potential for creating recursion (triggering a setNeedsLayout from layoutSubviews can create a loop that will grossly affect your apps performance). Layout subviews is called once per run loop on any view that has had setNeedsLayout or setNeedsDisplayWithRect: called on it. So in addition to any time you manually call these methods, it can be useful to know when the UI framework calls setNeedsLayout/setNeedsDisplay as this will trigger layoutSubviews.</p>
+<p>For this purpose, I will define a few view relationships:</p>
+<ul>
+<li>View1 – UIView class, root view for examples</li>
+<li>View1.1 – UIScrollView class, subview of View1</li>
+<li>View1.1.1 – UIView class, subview of View1.1 (No autoresize mask)</li>
+<li>View1.1.2 – UIView class, another subview of View1.1 (Autoresize mask – flexible width)</li>
+</ul>
+<p>I then ran the following tests.  An X means the view was layed out</p>
+<p>//TODO:  layoutSubviews 图片</p>
+<p>From this I surmise the following:</p>
+<ul>
+<li>init does not cause layoutSubviews to be called (duh)</li>
+<li>addSubview causes layoutSubviews to be called on the view being added, the view it’s being added to (target view), and all the subviews of the target view</li>
+<li>setFrame intelligently calls layoutSubviews on the view having it’s frame set only if the size parameter of the frame is different</li>
+<li>scrolling a UIScrollView causes layoutSubviews to be called on the scrollView, and it’s superview</li>
+<li>rotating a device only calls layoutSubview on the parent view (the responding viewControllers primary view)</li>
+<li>removeFromSuperview – layoutSubviews is called on superview only (not show in table)</li>
+</ul>
+<p>Hopefully this is helpful information for you as well.</p>
+<p>英文：When is layoutSubviews called?<br><a href="http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called" target="_blank" rel="external">http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called</a></p>
+<p>中文：什么时候调用layoutSubviews<br><a href="http://blog.csdn.net/hopedark/article/details/24313445" target="_blank" rel="external">http://blog.csdn.net/hopedark/article/details/24313445</a></p>
+<p>I had a similar question, but wasn’t satisfied with the answer (or any I could find on the net), so I tried it in practice and here is what I got:</p>
+<ul>
+<li>init does not cause layoutSubviews to be called (duh)</li>
+<li>addSubview: causes layoutSubviews to be called on the view being added, the view it’s being added to (target view), and all the subviews of the target</li>
+<li>view setFrame intelligently calls layoutSubviews on the view having its frame set only if the size parameter of the frame is different</li>
+<li>scrolling a UIScrollView causes layoutSubviews to be called on the scrollView, and its superview</li>
+<li>rotating a device only calls layoutSubview on the parent view (the responding viewControllers primary view)</li>
+<li>Resizing a view will call layoutSubviews on its superview</li>
+</ul>
+<p>今天在写程序时候遇见layoutSubviews触发时候引起的问题。特来总结一下什么时候会触发layoutSubviews：</p>
+<p>layoutSubviews在以下情况下会被调用：</p>
+<p>1、init初始化不会触发layoutSubviews</p>
+<p>2、addSubview会触发layoutSubviews</p>
+<p>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</p>
+<p>4、滚动一个UIScrollView会触发layoutSubviews</p>
+<p>5、旋转Screen会触发父UIView上的layoutSubviews事件</p>
+<p>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</p>
+<h4 id="网络回调"><a href="#网络回调" class="headerlink" title="网络回调"></a>网络回调</h4><p><a href="http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming" target="_blank" rel="external">What exactly is RESTful programming?</a></p>
+<p>网络回调方式总结：</p>
+<p>1、代理<br>2、通知<br>3、代码块<br>4、IMP</p>
+<p>代理<br>优点：效率高<br>缺点：代码耦合度高，若一个Controller有多个网络请求，响应同一个代理方法，代码将变得臃肿难看</p>
+<p>通知<br>优点：代码耦合度低，简单<br>缺点：多对多，容易滥用，不易控制，释放不及时可能导致通知方法调用多次，不易维护</p>
+<p>代码块<br>优点：耦合度低，效率较高，代码更优雅<br>缺点：块会延迟对象的生命周期，占用较多的内存，使用不当会造成内存泄露，以及循环引用</p>
+<p>IMP<br>优点：耦合度低<br>缺点：编译时不会错误检查（如方法名错误等），不易维护</p>
+<h4 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h4><p><a href="http://stackoverflow.com/questions/24158648/why-isnt-projectname-prefix-pch-created-automatically-in-xcode-6" target="_blank" rel="external">Why isn’t ProjectName-Prefix.pch created automatically in Xcode 6?</a></p>
+<p>//TODO:  插入图片</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Well, depending <span class="keyword">on</span> <span class="keyword">the</span> working dir, variables could vary. I am using$(PRODUCT_DIR)/$(PRODUCT_NAME)/PrefixHeader.pch – Alejandro Iván Oct <span class="number">13</span> '<span class="number">15</span> <span class="keyword">at</span> <span class="number">14</span>:<span class="number">40</span></div><div class="line">If you keep <span class="keyword">the</span> .pch <span class="built_in">file</span> within <span class="keyword">the</span> particular folder, <span class="keyword">then</span> <span class="keyword">the</span> situation occurred. – Prakash Raj Oct <span class="number">15</span> '<span class="number">15</span> <span class="keyword">at</span> <span class="number">6</span>:<span class="number">22</span></div></pre></td></tr></table></figure>
+<p><a href="http://tech.glowing.com/cn/practice-in-uiscrollview/" target="_blank" rel="external">UIScrollView 实践经验</a></p>
+<p><a href="http://gold.xitu.io/entry/56488b7660b20fc9b9c2f0be" target="_blank" rel="external">Charles 从入门到精通 - 唐巧的技术博客</a></p>
+<p><a href="http://blog.db-in.com/universal-framework-for-ios/" target="_blank" rel="external">iphone中自定义Universal Framework</a></p>
+<p><a href="http://stackoverflow.com/questions/5276967/python-in-xcode-7" target="_blank" rel="external">Python in Xcode 7</a></p>
+<p><a href="http://adad184.com/2015/10/09/tips-search-chinese-string/" target="_blank" rel="external">Tips:使用Xcode查找项目中的中文字符串</a></p>
+<p><a href="http://www.cnblogs.com/hanyonglu/archive/2012/03/04/2378956.html" target="_blank" rel="external">XMPP协议实现原理介绍</a></p>
+<p><a href="http://blog.typpz.com/2014/04/27/xcode-5-test-uitableview-with-xctest-framework/" target="_blank" rel="external">Xcode 5: Test UITableView with XCTest framework</a></p>
+<p><a href="http://www.cnblogs.com/wengzilin/p/4601684.html" target="_blank" rel="external">【原】ios打包ipa的四种实用方法(.app转.ipa)</a></p>
+<p><a href="http://blog.csdn.net/duyanglu/article/details/48897265" target="_blank" rel="external">AFNetworking使用</a></p>
+<p><a href="http://blog.csdn.net/codywangziham01/article/details/38088017" target="_blank" rel="external">AFNetwork 作用和用法详解</a></p>
+<p><a href="http://www.jianshu.com/p/2cb9136c837a" target="_blank" rel="external">AFNetworking 3 批量上传图片的 3 种方法</a></p>
+<p><a href="http://stackoverflow.com/questions/23828798/dispatch-group-notify-does-not-wait-for-one-dispatch-group-async" target="_blank" rel="external">dispatch_group_notify does not wait for one dispatch_group_async （这个好）</a></p>
+<p><a href="http://stackoverflow.com/questions/21381950/getting-download-progress-with-afnetworking-2-0-nsprogress-custom-progressvi" target="_blank" rel="external">Getting Download progress with AFNetworking 2.0 + NSProgress + Custom ProgressView</a></p>
+<p><a href="http://stackoverflow.com/questions/25102155/afhttprequestoperationmanager-post-multi-part-request-not-working" target="_blank" rel="external">AFHTTPRequestOperationManager post multi-part request not working (这个好呀)</a></p>
+<p><a href="http://stackoverflow.com/questions/19712612/how-to-set-http-request-body-using-afnetworks-afhttprequestoperationmanager" target="_blank" rel="external">How to set HTTP request body using AFNetwork’s AFHTTPRequestOperationManager?</a></p>
+<p><a href="http://blog.csdn.net/gyz413977349/article/details/44199663" target="_blank" rel="external">总结-AFNetworking学习笔记</a></p>
+<p><a href="http://stackoverflow.com/questions/16692102/send-image-along-with-other-parameters-with-afnetworking" target="_blank" rel="external">send image along with other parameters with AFNetworking</a></p>
+<p><a href="http://stackoverflow.com/questions/20143877/afnetworking-2-how-to-cancel-a-afhttprequestoperationmanager-request" target="_blank" rel="external">AFNetworking 2: How to cancel a AFHTTPRequestOperationManager request?</a></p>
+<p><a href="http://stackoverflow.com/questions/20421028/afnetworking-2-0-how-to-read-response-header" target="_blank" rel="external">AFNetworking 2.0 // How to read response header</a></p>
+<p><a href="http://www.jianshu.com/p/403fab808b0e" target="_blank" rel="external">网络2-AFNetworking和WebView</a></p>
+<p><a href="http://stackoverflow.com/questions/22292716/afnetworking-2-with-parameters" target="_blank" rel="external">Afnetworking 2 with parameters</a></p>
+<p><a href="http://www.infoq.com/cn/news/2016/03/React-Native-develop-iOS" target="_blank" rel="external">用React Native开发第一个iOS应用</a></p>
+<p><a href="http://www.cocoachina.com/ios/20150318/11350.html" target="_blank" rel="external">Swift语言iOS开发：CALayer十则示例</a></p>
+<p><a href="http://www.infoq.com/cn/articles/use-flurry-to-statistics-and-analysis-user-behavior" target="_blank" rel="external">使用Flurry来统计和分析用户行为</a></p>
+<p><a href="https://github.com/RestKit/RestKit" target="_blank" rel="external">RestKit</a></p>
+<p><a href="https://github.com/mmattozzi/cocoa-rest-client" target="_blank" rel="external">cocoa-rest-client</a></p>
+<p><a href="http://blog.cnbang.net/tech/2578/" target="_blank" rel="external">iOS图片加载速度极限优化—FastImageCache解析</a></p>
+<p><a href="http://stackoverflow.com/questions/30963294/creating-ios-osx-frameworks-is-it-necessary-to-codesign-them-before-distributin" target="_blank" rel="external">Creating iOS/OSX Frameworks: is it necessary to codesign them before distributing to other developers?</a></p>
+<p><a href="http://stackoverflow.com/questions/18962925/what-is-the-difference-between-ns-enum-and-ns-options" target="_blank" rel="external">What is the difference between NS_ENUM and NS_OPTIONS?</a></p>
+<h4 id="Linux-Mac-类Unix"><a href="#Linux-Mac-类Unix" class="headerlink" title="Linux (Mac 类Unix)"></a>Linux (Mac 类Unix)</h4><p><a href="http://unix.stackexchange.com/questions/49906/why-is-freebsd-deprecating-gcc-in-favor-of-clang-llvm" target="_blank" rel="external">Why is FreeBSD deprecating GCC in favor of Clang/LLVM?</a></p>
+<p><a href="http://www.cnblogs.com/qoakzmxncb/archive/2013/04/18/3029105.html" target="_blank" rel="external">GCC，LLVM，Clang编译器对比</a></p>
+<p><a href="http://stackoverflow.com/questions/8205858/clang-vs-gcc-for-my-linux-development-project" target="_blank" rel="external">Clang vs GCC for my Linux Development project</a></p>
+<p><a href="http://stackoverflow.com/questions/4589335/llvm-vs-gcc-for-ios-development" target="_blank" rel="external">LLVM vs. GCC for iOS development</a></p>
+<p><a href="http://unix.stackexchange.com/questions/163/what-features-does-darwin-have-that-other-unixes-dont-or-vice-versa" target="_blank" rel="external">What features does Darwin have that other Unixes don’t, or vice versa?</a></p>
+<p><a href="http://unix.stackexchange.com/questions/695/where-does-mac-os-x-come-from" target="_blank" rel="external">Where does Mac OS X come from?</a></p>
+<p><a href="http://stackoverflow.com/questions/3446231/how-close-are-mac-os-x-and-bsd-related" target="_blank" rel="external">How close are Mac OS X and BSD related?</a></p>
+<p><a href="http://stackoverflow.com/questions/680684/multi-cpu-multi-core-and-hyper-thread" target="_blank" rel="external">multi-CPU, multi-core, and hyper-thread</a></p>
+<p><a href="http://www.shellhacks.com/en/SSH-with-Public-Key-Based-Authentication" target="_blank" rel="external">SSH with Public Key-Based Authentication</a></p>
+<p>安装macvim</p>
+<p>安装Homebrew：打开“终端”程序，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span>，搞定</div></pre></td></tr></table></figure></p>
+<p><a href="http://blog.csdn.net/oklizy/article/details/42146015" target="_blank" rel="external">在mac上安装macvim</a></p>
+<p><a href="http://bbs.feng.com/read-htm-tid-7435912.html" target="_blank" rel="external">MacVim安装与配置</a></p>
+<p><a href="http://blog.csdn.net/forlong401/article/details/42340883" target="_blank" rel="external">MacVim学习总结</a></p>
+<p>gem brew ruby pod</p>
+<p><a href="http://stackoverflow.com/questions/33015875/operation-not-permitted-usr-bin-update-rubygems" target="_blank" rel="external">Operation not permitted - /usr/bin/update_rubygems</a></p>
+<p>关键：sudo gem install -n /usr/local/bin GEM_NAME_HERE</p>
+<p><a href="http://unix.stackexchange.com/questions/8656/usr-bin-vs-usr-local-bin-on-linux" target="_blank" rel="external">/usr/bin vs /usr/local/bin on Linux  (只关注: /usr/local/bin 即可)</a></p>
+<p>Homebrew 是 The missing package manager for OS X，</p>
+<p>Homebrew installs packages to their own directory and then symlinks their files into /usr/local.</p>
+<p><a href="https://ruby-china.org/wiki/install_ruby_guide" target="_blank" rel="external">如何快速正确的安装 Ruby, Rails 运行环境</a></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/18/23_Stanford-Study-Notes/" rel="next" title="Stanford公开课笔记">
+                <i class="fa fa-chevron-left"></i> Stanford公开课笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/26/25_iOS-RunLoop-Practices/" rel="prev" title="iOS的RunLoop以及项目实践">
+                iOS的RunLoop以及项目实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/img/author.jpg" alt="HawkingOuYang">
+          <p class="site-author-name" itemprop="name">HawkingOuYang</p>
+          <p class="site-description motion-element" itemprop="description">WeApp Web iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HawkingOuYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/3567356/user3567356" target="_blank" title="StackOverflow">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  StackOverflow
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:Hawking.HK@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#深拷贝、浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">深拷贝、浅拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#app-修改hosts"><span class="nav-number">2.</span> <span class="nav-text">app 修改hosts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tableView-性能优化"><span class="nav-number">3.</span> <span class="nav-text">tableView 性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cell圆角"><span class="nav-number">3.1.</span> <span class="nav-text">Cell圆角</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cell搜索匹配高亮"><span class="nav-number">3.2.</span> <span class="nav-text">cell搜索匹配高亮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cell动态高度"><span class="nav-number">3.3.</span> <span class="nav-text">cell动态高度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cell动态内容"><span class="nav-number">3.4.</span> <span class="nav-text">cell动态内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#table批更新"><span class="nav-number">3.5.</span> <span class="nav-text">table批更新</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layoutSubviews"><span class="nav-number">4.</span> <span class="nav-text">layoutSubviews</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络回调"><span class="nav-number">5.</span> <span class="nav-text">网络回调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS"><span class="nav-number">6.</span> <span class="nav-text">iOS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-Mac-类Unix"><span class="nav-number">7.</span> <span class="nav-text">Linux (Mac 类Unix)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HawkingOuYang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+<!--以下3行为一条竖线和Coding Page-->
+<div class="powered-by2">
+    <span class="hosted-by">Hosted by
+      <a href="https://pages.coding.me" style="font-weight: bold">
+        Coding Pages
+      </a>
+    </span>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'HawkingOuYang';
+      var disqus_identifier = '2016/03/26/24_iOS-MyNotes-ToBeTidy/';
+      var disqus_title = "iOS笔记(待整理)";
+      var disqus_url = 'https://HawkingOuYang.github.io/2016/03/26/24_iOS-MyNotes-ToBeTidy/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+
+
+
+<!--
+注释代码
+
+  背景动画
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+  页面点击小红心
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+注释代码
+-->
+
+
+</body>
+</html>
